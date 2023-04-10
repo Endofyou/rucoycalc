@@ -1,0 +1,128 @@
+<html style="background-color: #35363A">
+
+<head>
+  <title>Rucoy Efficiency Calculator</title>
+</head>
+
+<body style="text-align: center;font-family: Trebuchet MS">
+
+  <h1 style="color: #43FFCB">
+    Rucoy Efficiency Calculator
+  </h1>
+
+  <p style="color: #70D9B9;font-size:130%">
+    Input into the following boxes the corresponding information to derive training efficiency.
+  </p>
+
+  <div style="color: #DAFFF3;font-size:110%">
+    <input type="checkbox" id="enablePtrain" name="enablePtrain" value="enablePtrain" onclick="TextBox0()">
+    <label for="enablePtrain">Enable Ptraining</label>
+    <p id="mageToggle"><input type="checkbox" id="magePtrain" name="magePtrain" value="magePtrain" onclick="MagePtrain()">
+    <label for="magePtrain">Enable Magic</label></p>
+    <p id="ticksBox">Number of Ticks: <input type="text" id="textBox0" value="5" /></p>
+    <p>Base Level: <input type="text" id="textBox1" value="" /></p>
+    <p>Total Skill Level: <input type="text" id="textBox2" value="" /></p>
+    <p>Weapon Attack: <input type="text" id="textBox3" value="" /></p>
+    <p>Mob Defense: <input type="text" id="textBox4" value="" /></p>
+    <input type="checkbox" id="advancedOptions" name="advancedOptions" value="advancedOptions" onclick="AdvancedOptions()">
+    <label for="advancedOptions">Advanced Options</label>
+    <p id="critC">Percent Crit Chance: <input type="text" id="textBox5" value="1" /></p>
+    <p id="critM">Crit Multiplier: <input type="text" id="textBox6" value="1.025" /></p>
+    <p id="mageM">Magic Spec. Multiplier: <input type="text" id="textBox7" value="1.08" /></p>
+  </div>
+
+  <p><button type="button" onclick="Calulation()">Calculate</button></p>
+
+  <p id="finalResults" style="color: #DAFFF3;font-size:120%">[Results will display here]</p>
+
+  <script>
+    document.getElementById("mageToggle").style.display = "none";
+    document.getElementById("ticksBox").style.display = "none";
+    document.getElementById("critC").style.display = "none";
+    document.getElementById("critM").style.display = "none";
+    document.getElementById("mageM").style.display = "none";
+
+    function TextBox0() {
+      if (document.getElementById("enablePtrain").checked == true) {
+        document.getElementById("mageToggle").style.display = "block";
+        document.getElementById("ticksBox").style.display = "block";
+      } else {
+        document.getElementById("mageToggle").style.display = "none";
+        document.getElementById("ticksBox").style.display = "none";
+      }
+    }
+    
+    function AdvancedOptions() {
+      if (document.getElementById("advancedOptions").checked == true) {
+        document.getElementById("critC").style.display = "block";
+        document.getElementById("critM").style.display = "block";
+        document.getElementById("mageM").style.display = "block";
+      } else {
+        document.getElementById("critC").style.display = "none";
+        document.getElementById("critM").style.display = "none";
+        document.getElementById("mageM").style.display = "none";
+      }
+    }
+
+    function Calulation() {
+      const ticks = document.getElementById("textBox0").value;
+      const base = document.getElementById("textBox1").value;
+      const skill = document.getElementById("textBox2").value;
+      const weapon = document.getElementById("textBox3").value;
+      const defense = document.getElementById("textBox4").value;
+      const critChance = document.getElementById("textBox5").value;
+      const critMulti = document.getElementById("textBox6").value * 2 - 1;
+      const magic = document.getElementById("textBox7").value;
+      const maxAttack =
+        document.getElementById("enablePtrain").checked == false
+          ? Math.floor(Math.floor(base / 4) + skill * (weapon / 10))
+          : document.getElementById("magePtrain").checked == false
+          ? Math.floor((Math.floor(base / 4) + skill * (weapon / 10)) * 1.5)
+          : Math.floor((Math.floor(base / 4) + skill * (weapon / 10)) * 1.5 * magic);
+      const minAttack =
+        document.getElementById("enablePtrain").checked == false
+          ? Math.floor(Math.floor(base / 4) + (skill * (weapon / 10)) / 2)
+          : document.getElementById("magePtrain").checked == false
+          ? Math.floor((Math.floor(base / 4) + (skill * (weapon / 10)) / 2) * 1.5)
+          : Math.floor((Math.floor(base / 4) + (skill * (weapon / 10)) / 2) * 1.5 * magic);
+      if (defense >= maxAttack * critMulti) {
+        document.getElementById("finalResults").innerHTML = "Mob cannot be damaged with this configuration.";
+      } else {
+        const trials = 5e6;
+        const maxMisses = 
+          document.getElementById("enablePtrain").checked == false
+            ? 10
+            : 9 * ticks;
+        let damage;
+        let missStreak = 0;
+        let pointsLost = 0;
+        let totalDamage = 0;
+        for (let i = 0; i < trials; i++) {
+          if (critChance / 100 >= Math.random()) {
+            damage = maxAttack + maxAttack * (critMulti - 1) * Math.random() - defense;
+          } else {
+            damage = minAttack + (maxAttack - minAttack) * Math.random() - defense;
+          }
+          if (damage <= 0) {
+            missStreak++
+            damage = 0;
+          } else {
+            missStreak = 0;
+          }
+          if (maxMisses <= missStreak) {
+            pointsLost++;
+          }
+          totalDamage += damage;
+        }
+        const totalEfficiency = (trials - pointsLost) / trials;
+        const results = Math.round(totalEfficiency * 1e5) / 1e3;
+        const averageDPS = Math.round(totalDamage * 1e3 / trials) / 1e3;
+        document.getElementById("finalResults").innerHTML =
+          "Results: " + results + "% efficiency, total DPS is " + averageDPS;
+      }
+    }
+  </script>
+
+</body>
+
+</html>
