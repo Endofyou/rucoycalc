@@ -87,7 +87,8 @@
         equips < -50 || equips > 76 ||
         att < 4 || att > 60
       ) {
-        document.getElementById("resultsText2").innerHTML = "ERROR: Please ensure all fields are filled with realistic entries."
+        document.getElementById("resultsText1").innerHTML = "ERROR: Please ensure all fields are filled with realistic entries."
+        document.getElementById("resultsText2").innerHTML = ""
         return
       }
 
