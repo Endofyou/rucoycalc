@@ -81,6 +81,16 @@
       const ptrain = +document.getElementById("enablePt").checked ? true : false
       const magic = +document.getElementById("magePt").checked ? true : false
 
+      if (
+        base < 1 || base > 1000 ||
+        stat < 5 || stat > 1000 ||
+        equips < -50 || equips > 76 ||
+        att < 4 || att > 60
+      ) {
+        document.getElementById("resultsText2").innerHTML = "ERROR: Please ensure all fields are filled with realistic entries."
+        return
+      }
+
       const totalStat = stat + equips
       const ticks = ptrain == true ? 38 : 10
       const specMulti = (ptrain == true ? 1.5 * (magic == true ? magicMulti : 1) : 1)
