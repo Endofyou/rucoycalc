@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+}
+
+@media only screen and (max-width: 620px) {
+  /* For mobile phones: */
+  .menu, .main, .right {
+    width: 100%;
+  }
+}
+
+body {
+  background-color: #35363A;
+  font-family: Verdana;
+  color: #d9f2e6;
+  text-align: center;
+  margin: 0px;
+}
+
+input[type=text] {
+  width: 50px;
+}
+
+#header {
+  background-color: #367d5c;
+  padding: 10px;
+  margin-top: 20px
+}
+
+#description {
+  font-size: 120%;
+  padding: 15px
+}
+
+#mainContent {
+  font-size: 110%;
+}
+
+#results {
+  font-size: 120%;
+  background-color: #367d5c;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+}
