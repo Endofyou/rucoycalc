@@ -1,124 +1,174 @@
-<html style="background-color: #35363A">
+<!DOCTYPE html>
+<html>
 
 <head>
-  <title>Rucoy Efficiency Calculator</title>
+  <title>Rucoy Training Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
-<body style="text-align: center;font-family: Trebuchet MS">
+<body>
 
-  <h1 style="color: #43FFCB">
-    Rucoy Efficiency Calculator
-  </h1>
-
-  <p style="color: #70D9B9;font-size:130%">
-    Input into the following boxes the corresponding information to derive training efficiency.
-  </p>
-
-  <div style="color: #DAFFF3;font-size:110%">
-    <input type="checkbox" id="enablePtrain" name="enablePtrain" value="enablePtrain" onclick="TextBox0()">
-    <label for="enablePtrain">Enable Ptraining</label>
-    <p id="mageToggle"><input type="checkbox" id="magePtrain" name="magePtrain" value="magePtrain" onclick="MagePtrain()">
-    <label for="magePtrain">Enable Magic</label></p>
-    <p id="ticksBox">Number of Ticks: <input type="text" id="textBox0" value="4" /></p>
-    <p>Base Level: <input type="text" id="textBox1" value="" /></p>
-    <p>Total Skill Level: <input type="text" id="textBox2" value="" /></p>
-    <p>Weapon Attack: <input type="text" id="textBox3" value="" /></p>
-    <p>Mob Defense: <input type="text" id="textBox4" value="" /></p>
-    <input type="checkbox" id="advancedOptions" name="advancedOptions" value="advancedOptions" onclick="AdvancedOptions()">
-    <label for="advancedOptions">Advanced Options</label>
-    <p id="critC">Percent Crit Chance: <input type="text" id="textBox5" value="1" /></p>
-    <p id="critM">Crit Multiplier: <input type="text" id="textBox6" value="1.025" /></p>
-    <p id="mageM">Magic Spec. Multiplier: <input type="text" id="textBox7" value="1.08" /></p>
+  <div id="header">
+    <h1>Rucoy Training Calculator</h1>
   </div>
 
-  <p><button type="button" onclick="Calulation()">Calculate</button></p>
+  <p id="description">
+    Input into the following fields the corresponding information to receive training insights.
+  </p>
 
-  <p id="finalResults" style="color: #DAFFF3;font-size:120%">[Results will display here]</p>
+  <div id="mainContent">
+
+    <input type="checkbox" id="enablePt" onclick="enablePtrain()">
+    <label for="enablePt">Enable Ptraining</label>
+
+    <p id="mageToggle">
+      <input type="checkbox" id="magePt">
+      <label for="magePt">Enable Magic</label>
+    </p>
+
+    <p>Base Level: <input type="number" id="box1" value="500"></p>
+    <p>Skill Level: <input type="number" id="box2" value="500"></p>
+    <p>Extra Equips: <input type="number" id="box3" value="0"></p>
+    <p>Weapon Attack: <input type="number" id="box4" value="5"></p>
+
+    <input type="checkbox" id="advancedToggle" onclick="advancedOptions()">
+    <label for="advancedToggle">Advanced Options</label>
+
+    <div id="advancedBoxes">
+      <p>target % efficiency: <input type="number" id="box5" value="90"></p>
+      <p>% Crit Chance: <input type="number" id="box6" value="1"></p>
+      <p>Crit Multiplier: <input type="number" id="box7" value="1.05"></p>
+      <p>Magic Multiplier: <input type="number" id="box8" value="1.08"></p>
+    </div>
+
+  </div>
+
+  <p><button type="button" onclick="calculation()">Calculate</button></p>
+
+  <div id="results">
+    <div id="resultsText1">[Results will display here]</div>
+    <div id="resultsText2"></div>
+  </div>
+
+  <br>
 
   <script>
-    document.getElementById("mageToggle").style.display = "none";
-    document.getElementById("ticksBox").style.display = "none";
-    document.getElementById("critC").style.display = "none";
-    document.getElementById("critM").style.display = "none";
-    document.getElementById("mageM").style.display = "none";
+    document.getElementById("mageToggle").style.display = "none"
+    document.getElementById("advancedBoxes").style.display = "none"
 
-    function TextBox0() {
-      if (document.getElementById("enablePtrain").checked == true) {
-        document.getElementById("mageToggle").style.display = "block";
-        document.getElementById("ticksBox").style.display = "block";
-      } else {
-        document.getElementById("mageToggle").style.display = "none";
-        document.getElementById("ticksBox").style.display = "none";
-      }
-    }
-    
-    function AdvancedOptions() {
-      if (document.getElementById("advancedOptions").checked == true) {
-        document.getElementById("critC").style.display = "block";
-        document.getElementById("critM").style.display = "block";
-        document.getElementById("mageM").style.display = "block";
-      } else {
-        document.getElementById("critC").style.display = "none";
-        document.getElementById("critM").style.display = "none";
-        document.getElementById("mageM").style.display = "none";
-      }
+    function enablePtrain() {
+      document.getElementById("enablePt").checked == true
+      ? document.getElementById("mageToggle").style.display = "block"
+      : document.getElementById("mageToggle").style.display = "none"
     }
 
-    function Calulation() {
-      const ticks = document.getElementById("textBox0").value;
-      const base = document.getElementById("textBox1").value;
-      const skill = document.getElementById("textBox2").value;
-      const weapon = document.getElementById("textBox3").value;
-      const defense = document.getElementById("textBox4").value;
-      const critChance = document.getElementById("textBox5").value;
-      const critMulti = document.getElementById("textBox6").value * 2 - 1;
-      const magic = document.getElementById("textBox7").value;
-      const maxAttack =
-        document.getElementById("enablePtrain").checked == false
-          ? Math.floor(Math.floor(base / 4) + skill * (weapon / 10))
-          : document.getElementById("magePtrain").checked == false
-          ? Math.floor((Math.floor(base / 4) + skill * (weapon / 10)) * 1.5)
-          : Math.floor((Math.floor(base / 4) + skill * (weapon / 10)) * 1.5 * magic);
-      const minAttack =
-        document.getElementById("enablePtrain").checked == false
-          ? Math.floor(Math.floor(base / 4) + (skill * (weapon / 10)) / 2)
-          : document.getElementById("magePtrain").checked == false
-          ? Math.floor((Math.floor(base / 4) + (skill * (weapon / 10)) / 2) * 1.5)
-          : Math.floor((Math.floor(base / 4) + (skill * (weapon / 10)) / 2) * 1.5 * magic);
-      if (defense >= maxAttack * critMulti) {
-        document.getElementById("finalResults").innerHTML = "Mob cannot be damaged with this configuration.";
-      } else {
-        const trials = 5e6;
-        const maxMisses = 
-          document.getElementById("enablePtrain").checked == false
-            ? 10
-            : 10 * ticks;
-        let damage;
-        let missStreak = 0;
-        let pointsLost = 0;
-        let totalDamage = 0;
-        for (let i = 0; i < trials; i++) {
-          if (critChance / 100 >= Math.random()) {
-            damage = maxAttack + maxAttack * (critMulti - 1) * Math.random() - defense;
-          } else {
-            damage = minAttack + (maxAttack - minAttack) * Math.random() - defense;
+    function advancedOptions() {
+      document.getElementById("advancedToggle").checked == true
+      ? document.getElementById("advancedBoxes").style.display = "block"
+      : document.getElementById("advancedBoxes").style.display = "none"
+    }
+
+    function calculation() {
+      const base = +document.getElementById("box1").value
+      const stat = +document.getElementById("box2").value
+      const equips = +document.getElementById("box3").value
+      const att = +document.getElementById("box4").value
+      const targetEff = +document.getElementById("box5").value
+      const crit = +document.getElementById("box6").value / 100
+      const critMulti = +document.getElementById("box7").value
+      const magicMulti = +document.getElementById("box8").value
+      const ptrain = +document.getElementById("enablePt").checked ? true : false
+      const magic = +document.getElementById("magePt").checked ? true : false
+
+      const totalStat = stat + equips
+      const ticks = ptrain == true ? 38 : 10
+      const specMulti = (ptrain == true ? 1.5 * (magic == true ? magicMulti : 1) : 1)
+      const min = Math.floor(specMulti * (Math.floor(base / 4) + att * totalStat / 20))
+      const max = Math.floor(specMulti * (Math.floor(base / 4) + att * totalStat / 10))
+      const avgCritMulti = 1 + (critMulti - 1) / 2
+      const targetProb = 1 - ((100 - targetEff) / 100) ** (1 / ticks)
+
+      const mobArray = [
+        { name:                  "Rat Lv.1", def:   4, hp:   25, ptrain: false },
+        { name:                  "Rat Lv.3", def:   7, hp:   35, ptrain: false },
+        { name:                 "Crow Lv.6", def:  13, hp:   40, ptrain: false },
+        { name:                 "Wolf Lv.9", def:  17, hp:   50, ptrain: false },
+        { name:            "Scorpion Lv.12", def:  18, hp:   50, ptrain: false },
+        { name:               "Cobra Lv.13", def:  18, hp:   50, ptrain: false },
+        { name:                "Worm Lv.14", def:  19, hp:   55, ptrain: false },
+        { name:              "Goblin Lv.15", def:  21, hp:   60, ptrain:  true },
+        { name:               "Mummy Lv.25", def:  36, hp:   80, ptrain:  true },
+        { name:             "Pharaoh Lv.35", def:  51, hp:  100, ptrain:  true },
+        { name:            "Assassin Lv.45", def:  71, hp:  120, ptrain:  true },
+        { name:            "Assassin Lv.50", def:  81, hp:  140, ptrain:  true },
+        { name:      "Assassin Ninja Lv.55", def:  91, hp:  160, ptrain:  true },
+        { name:     "Skeleton Archer Lv.80", def: 101, hp:  300, ptrain: false },
+        { name:              "Zombie Lv.65", def: 106, hp:  200, ptrain:  true },
+        { name:            "Skeleton Lv.75", def: 121, hp:  300, ptrain:  true },
+        { name:    "Skeleton Warrior Lv.90", def: 146, hp:  375, ptrain:  true },
+        { name:            "Vampire Lv.100", def: 171, hp:  450, ptrain:  true },
+        { name:            "Vampire Lv.110", def: 186, hp:  530, ptrain:  true },
+        { name:        "Drow Ranger Lv.125", def: 191, hp:  600, ptrain: false },
+        { name:          "Drow Mage Lv.130", def: 191, hp:  600, ptrain: false },
+        { name:      "Drow Assassin Lv.120", def: 221, hp:  620, ptrain:  true },
+        { name:     "Drow Sorceress Lv.140", def: 221, hp:  600, ptrain: false },
+        { name:       "Drow Fighter Lv.135", def: 246, hp:  680, ptrain:  true },
+        { name:      "Lizard Archer Lv.160", def: 271, hp:  650, ptrain: false },
+        { name:      "Lizard Shaman Lv.170", def: 276, hp:  600, ptrain: false },
+        { name:          "Dead Eyes Lv.170", def: 276, hp:  600, ptrain: false },
+        { name:     "Lizard Warrior Lv.150", def: 301, hp:  680, ptrain:  true },
+        { name:              "Djinn Lv.150", def: 301, hp:  640, ptrain:  true },
+        { name: "Lizard High Shaman Lv.190", def: 326, hp:  740, ptrain: false },
+        { name:           "Gargoyle Lv.190", def: 326, hp:  740, ptrain:  true },
+        { name:     "Lizard Captain lv.180", def: 361, hp:  815, ptrain:  true },
+        { name:           "Minotaur Lv.225", def: 511, hp: 4250, ptrain:  true },
+        { name:           "Minotaur Lv.250", def: 601, hp: 5000, ptrain:  true },
+        { name:           "Minotaur Lv.275", def: 691, hp: 5750, ptrain:  true },
+        ]
+
+      let targetMob = 0
+      let nextMob = 0
+      let reqStats = 0
+      let duration = 0
+      for (let i = 0; i < mobArray.length; i++) {
+        if (ptrain == true && mobArray[i].ptrain == false) { continue }
+          const prob = Math.min((1 - crit) * (max - mobArray[i].def) / (max - min) + crit, 1)
+        if (targetProb < prob) {
+          const durationCheck = min < mobArray[i].def
+          ? mobArray[i].hp / (
+            crit * (max * avgCritMulti - mobArray[i].def) +
+            (1 - crit) * (max - mobArray[i].def) * prob / 2
+            )
+          : mobArray[i].hp / (
+            crit * (max * avgCritMulti - mobArray[i].def) +
+            (1 - crit) * (max + min - 2 * mobArray[i].def) / 2
+            )
+          if (duration < durationCheck) {
+            duration = durationCheck
+            targetMob = mobArray[i].name
+          } else if (duration == durationCheck) {
+            targetMob += " & " + mobArray[i].name
           }
-          if (damage <= 0) {
-            missStreak++
-            damage = 0;
-          } else {
-            missStreak = 0;
-          }
-          if (maxMisses <= missStreak) {
-            pointsLost++;
-          }
-          totalDamage += damage;
+        } else {
+          nextMob = mobArray[i].name
+          reqStats = Math.ceil(
+            (20 * mobArray[i].def - 20 * Math.floor(base / 4) * specMulti) /
+            (att * specMulti * (2 - (targetProb - crit) / (1 - crit)))
+            ) - totalStat + 1
+          break
         }
-        const totalEfficiency = (trials - pointsLost) / trials;
-        const results = Math.round(totalEfficiency * 1e5) / 1e3;
-        const averageDPS = Math.round(totalDamage * 1e3 / trials) / 1e3;
-        document.getElementById("finalResults").innerHTML =
-          "Results: " + results + "% efficiency, total DPS is " + averageDPS;
+      }
+
+      if (targetMob != 0) {
+        document.getElementById("resultsText1").innerHTML = "You can effectively " + (ptrain == true ? "ptrain " : "train ") + targetMob + " for an average duration of " + Math.round(duration) + " seconds."
+      } else {
+        document.getElementById("resultsText1").innerHTML = "There are no mobs you can train at your level."
+      }
+      if (nextMob != 0) {
+        document.getElementById("resultsText2").innerHTML = " You can start training " + nextMob + " after " + reqStats + " more stat(s)."
+      } else {
+        document.getElementById("resultsText2").innerHTML = ""
       }
     }
   </script>
