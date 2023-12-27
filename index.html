@@ -87,6 +87,10 @@
         stat < 5 || stat > 1000 ||
         equips < -50 || equips > 76 ||
         att < 4 || att > 60
+        targetEff < 0 || targetEff > 99
+        crit < 0 || crit > 100
+        critMulti < 1 || critMulti > 2
+        magicMulti < 1 || magicMulti > 2
       ) {
         document.getElementById("resultsText1").innerHTML = "ERROR: Please ensure all fields are properly filled with valid entries."
         document.getElementById("resultsText2").innerHTML = ""
