@@ -12,12 +12,13 @@ body {
 
 #header {
   background-color: #367d5c;
-  margin-top: 20px
+  padding:1px;
+  margin-top: 20px;
 }
 
 #description {
   font-size: 120%;
-  padding: 15px
+  padding: 15px;
 }
 
 #mainContent {
