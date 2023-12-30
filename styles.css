@@ -10,9 +10,14 @@ body {
   margin: 0px;
 }
 
+input[type='number']{
+  width: 70px;
+  background-color: #FFFFFF;
+} 
+
 #header {
   background-color: #367d5c;
-  padding:1px;
+  padding: 1px;
   margin-top: 20px;
 }
 
