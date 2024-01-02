@@ -100,8 +100,8 @@
       const totalStat = stat + equips
       const ticks = ptrain == true ? 38 : 10
       const specMulti = (ptrain == true ? 1.5 * (magic == true ? magicMulti : 1) : 1)
-      const min = Math.floor(specMulti * (Math.floor(base / 4) + att * totalStat / 20))
-      const max = Math.floor(specMulti * (Math.floor(base / 4) + att * totalStat / 10))
+      const min = specMulti * (Math.floor(base / 4) + att * totalStat / 20)
+      const max = specMulti * (Math.floor(base / 4) + att * totalStat / 10)
       const avgCritMulti = 1 + (critMulti - 1) / 2
       const targetProb = 1 - ((100 - targetEff) / 100) ** (1 / ticks)
 
