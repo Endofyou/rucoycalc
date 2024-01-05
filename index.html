@@ -71,6 +71,16 @@
     }
 
     function calculation() {
+      const base = +document.getElementById("box1").value
+      const stat = +document.getElementById("box2").value
+      const equips = +document.getElementById("box3").value
+      const att = +document.getElementById("box4").value
+      const targetEff = +document.getElementById("box5").value
+      const crit = +document.getElementById("box6").value / 100
+      const critMulti = +document.getElementById("box7").value
+      const magicMulti = +document.getElementById("box8").value
+      const ptrain = +document.getElementById("enablePt").checked ? true : false
+      const magic = +document.getElementById("magePt").checked ? true : false
       
       if (
         base < 1 || base > 1000 ||
@@ -91,17 +101,6 @@
       } else if (targetEff > 99) {
         document.getElementById("box1").innerHTML = 99
       }
-
-      const base = +document.getElementById("box1").value
-      const stat = +document.getElementById("box2").value
-      const equips = +document.getElementById("box3").value
-      const att = +document.getElementById("box4").value
-      const targetEff = +document.getElementById("box5").value
-      const crit = +document.getElementById("box6").value / 100
-      const critMulti = +document.getElementById("box7").value
-      const magicMulti = +document.getElementById("box8").value
-      const ptrain = +document.getElementById("enablePt").checked ? true : false
-      const magic = +document.getElementById("magePt").checked ? true : false
 
       const totalStat = stat + equips
       const ticks = ptrain == true ? 38 : 10
