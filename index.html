@@ -69,7 +69,14 @@
       : document.getElementById("advancedBoxes").style.display = "none"
     }
 
-    function calculation() {
+    async function calculation() {
+      document.getElementById("resultsText1").innerHTML = "Loading"
+      document.getElementById("resultsText2").innerHTML = ""
+      for (let i = 0; i < 4; i++) {
+        await new Promise(t => setTimeout(t, 50))
+        document.getElementById("resultsText1").innerHTML += "."
+      }
+    
       const base      = +Math.floor(document.getElementById("box1").value)
       const stat      = +Math.floor(document.getElementById("box2").value)
       const equips    = +Math.floor(document.getElementById("box3").value)
