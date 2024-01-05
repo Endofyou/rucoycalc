@@ -12,7 +12,13 @@ body {
 
 input[type='number'] {
   width: 70px;
+  height: 25px;
   background-color: #FFFFFF;
+} 
+
+button {
+  height: 25px;
+  margin-top: 18px;
 } 
 
 #header {
