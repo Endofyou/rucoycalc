@@ -75,6 +75,7 @@
       const stat = +document.getElementById("box2").value
       const equips = +document.getElementById("box3").value
       const att = +document.getElementById("box4").value
+      let targetEff = +document.getElementById("box5").value
       const crit = +document.getElementById("box6").value / 100
       const critMulti = +document.getElementById("box7").value
       const magicMulti = +document.getElementById("box8").value
@@ -100,8 +101,8 @@
       } else if (targetEff > 99) {
         document.getElementById("box1").innerHTML = "99"
       }
+      targetEff = +document.getElementById("box5").value
 
-      const targetEff = +document.getElementById("box5").value
       const totalStat = stat + equips
       const ticks = ptrain == true ? 38 : 10
       const specMulti = (ptrain == true ? 1.5 * (magic == true ? magicMulti : 1) : 1)
