@@ -76,7 +76,7 @@
         await new Promise(t => setTimeout(t, 50))
         document.getElementById("resultsText1").innerHTML += "."
       }
-    
+      
       const base      = +Math.floor(document.getElementById("box1").value)
       const stat      = +Math.floor(document.getElementById("box2").value)
       const equips    = +Math.floor(document.getElementById("box3").value)
@@ -233,6 +233,8 @@
       } else {
         document.getElementById("resultsText2").innerHTML = ""
       }
+      
+      window.scrollTo(0, document.body.scrollHeight)
     }
   </script>
 
