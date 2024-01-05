@@ -70,6 +70,8 @@
     }
 
     async function calculation() {
+      window.scrollTo(0, document.body.scrollHeight)
+      
       document.getElementById("resultsText1").innerHTML = "Loading"
       document.getElementById("resultsText2").innerHTML = ""
       for (let i = 0; i < 4; i++) {
