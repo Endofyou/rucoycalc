@@ -205,8 +205,19 @@
         }
       }
 
-      const minutes = Math.floor(duration / 60)
-      const seconds = Math.round((duration / 60 - minutes) * 60)
+      let minutes = Math.floor(duration / 60)
+      let seconds = Math.round((duration / 60 - minutes) * 60)
+      if (minutes == 0) {
+        minutes = "00"
+      } else if (minutes.length == 1) {
+        minutes = "0" + minutes
+      }
+      if (seconds == 0) {
+        seconds = "00"
+      } else if (seconds.length == 1) {
+        seconds = "0" + seconds
+      }
+      
       if (targetMob != 0) {
         document.getElementById("resultsText1").innerHTML = "You can effectively " + (ptrain == true ? "ptrain " : "train ") + targetMob + " for an average duration of " + minutes + ":" + seconds + "."
       } else {
