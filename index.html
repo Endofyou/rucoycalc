@@ -38,9 +38,6 @@
 
     <div id="advancedBoxes">
       <p>target % efficiency: <input type="number" id="box5" value="90"></p>
-      <p>% Crit Chance: <input type="number" id="box6" value="1"></p>
-      <p>Crit Multiplier: <input type="number" id="box7" value="1.05"></p>
-      <p>Magic Multiplier: <input type="number" id="box8" value="1.08"></p>
     </div>
     
   </div>
@@ -71,45 +68,62 @@
     }
 
     function calculation() {
-      const base = +document.getElementById("box1").value
-      const stat = +document.getElementById("box2").value
-      const equips = +document.getElementById("box3").value
-      const att = +document.getElementById("box4").value
+      let base = +document.getElementById("box1").value
+      let stat = +document.getElementById("box2").value
+      let equips = +document.getElementById("box3").value
+      let att = +document.getElementById("box4").value
       let targetEff = +document.getElementById("box5").value
-      const crit = +document.getElementById("box6").value / 100
-      const critMulti = +document.getElementById("box7").value
-      const magicMulti = +document.getElementById("box8").value
+      
+      const crit = 0.01
+      const critMulti = 1.05
       const ptrain = +document.getElementById("enablePt").checked ? true : false
       const magic = +document.getElementById("magePt").checked ? true : false
       
-      if (
-        base < 1 || base > 1000 ||
-        stat < 5 || stat > 1000 ||
-        equips < -50 || equips > 76 ||
-        att < 4 || att > 60 ||
-        crit < 0 || crit > 100 ||
-        critMulti < 1 || critMulti > 2 ||
-        magicMulti < 1 || magicMulti > 2
-      ) {
-        document.getElementById("resultsText1").innerHTML = "ERROR: Please ensure all fields are properly filled with valid entries."
+      let errors = 0
+      if (base < 1 || base > 1000) {
+        document.getElementById("box1").style.backgroundColor = "#ff8080"
+        document.getElementById("box1").value = ""
+        errors++
+      } else {
+        document.getElementById("box1").style.backgroundColor = "white"
+      }
+      if (stat < 5 || stat > 1000) {
+        document.getElementById("box2").style.backgroundColor = "#ff8080"
+        document.getElementById("box2").value = ""
+        errors++
+      } else {
+        document.getElementById("box2").style.backgroundColor = "white"
+      }
+      if (equips < -50 || equips > 76) {
+        document.getElementById("box3").style.backgroundColor = "#ff8080"
+        document.getElementById("box3").value = ""
+        errors++
+      } else {
+        document.getElementById("box3").style.backgroundColor = "white"
+      }
+      if (att < 4 || att > 60) {
+        document.getElementById("box4").style.backgroundColor = "#ff8080"
+        document.getElementById("box4").value = ""
+        errors++
+      } else {
+        document.getElementById("box4").style.backgroundColor = "white"
+      }
+
+      if (targetEff < 50) {
+        document.getElementById("box5").value = "50"
+        document.getElementById("box5").style.backgroundColor = "#ffff80"
+      } else if (targetEff > 99) {
+        document.getElementById("box5").value = "99"
+        document.getElementById("box5").style.backgroundColor = "#ffff80"
+        
+      }
+      targetEff = +document.getElementById("box5").value
+      
+      if (errors > 0) {
+        document.getElementById("resultsText1").innerHTML = errors + (errors == 1 ? " ERROR:" : " ERRORS:") + " Please ensure all fields are properly filled with valid entries."
         document.getElementById("resultsText2").innerHTML = ""
         return
       }
-
-      if (targetEff < 1) {
-        document.getElementById("box5").value = "1"
-      } else if (targetEff > 99) {
-        document.getElementById("box5").value = "99"
-      }
-      targetEff = +document.getElementById("box5").value
-
-      const totalStat = stat + equips
-      const ticks = ptrain == true ? 38 : 10
-      const specMulti = (ptrain == true ? 1.5 * (magic == true ? magicMulti : 1) : 1)
-      const min = specMulti * (Math.floor(base / 4) + att * totalStat / 20)
-      const max = specMulti * (Math.floor(base / 4) + att * totalStat / 10)
-      const avgCritMulti = 1 + (critMulti - 1) / 2
-      const targetProb = 1 - ((100 - targetEff) / 100) ** (1 / ticks)
 
       const mobArray = [
         { name:                  "Rat Lv.1", def:   4, hp:   25, ptrain: false },
@@ -149,10 +163,15 @@
         { name:           "Minotaur Lv.275", def: 691, hp: 5750, ptrain:  true },
       ]
 
-      let targetMob = 0
-      let nextMob = 0
-      let reqStats = 0
-      let duration = 0
+      const totalStat = stat + equips
+      const ticks = ptrain == true ? 38 : 10
+      const specMulti = (ptrain == true ? 1.5 * (magic == true ? 1.08 : 1) : 1)
+      const min = specMulti * (Math.floor(base / 4) + att * totalStat / 20)
+      const max = specMulti * (Math.floor(base / 4) + att * totalStat / 10)
+      const avgCritMulti = 1 + (critMulti - 1) / 2
+      const targetProb = 1 - ((100 - targetEff) / 100) ** (1 / ticks)
+
+      let targetMob = nextMob = reqStats = duration = 0
       for (let i = 0; i < mobArray.length; i++) {
         if (ptrain == true && mobArray[i].ptrain == false) { continue }
           const prob = Math.min((1 - crit) * (max - mobArray[i].def) / (max - min) + crit, 1)
@@ -188,7 +207,7 @@
         document.getElementById("resultsText1").innerHTML = "There are no mobs you can train at your level."
       }
       if (nextMob != 0) {
-        document.getElementById("resultsText2").innerHTML = " You can start training " + nextMob + " with " + targetEff + "%+ efficiency after " + reqStats + " more stat(s)."
+        document.getElementById("resultsText2").innerHTML = " You can start training " + nextMob + " with " + targetEff + "%+ efficiency after " + reqStats + " more " + (reqStats == 1 ? "stat." : "stats.")
       } else {
         document.getElementById("resultsText2").innerHTML = ""
       }
