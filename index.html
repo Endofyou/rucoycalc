@@ -37,7 +37,7 @@
     <label for="advancedToggle">Advanced Options</label>
 
     <div id="advancedBoxes">
-      <p>target % efficiency: <input type="number" id="box5" value="90"></p>
+      <p>Target % Efficiency: <input type="number" id="box5" value="90"></p>
       <input type="checkbox" id="critRing">
       <label for="critRing">Enable Crit Ring</label>
     </div>
@@ -205,8 +205,10 @@
         }
       }
 
+      const minutes = Math.floor(duration / 60)
+      const seconds = Math.round((duration / 60 - minutes) * 60)
       if (targetMob != 0) {
-        document.getElementById("resultsText1").innerHTML = "You can effectively " + (ptrain == true ? "ptrain " : "train ") + targetMob + " for an average duration of " + Math.round(duration) + " seconds."
+        document.getElementById("resultsText1").innerHTML = "You can effectively " + (ptrain == true ? "ptrain " : "train ") + targetMob + " for an average duration of " + minutes + ":" + seconds + "."
       } else {
         document.getElementById("resultsText1").innerHTML = "There are no mobs you can train at your level."
       }
