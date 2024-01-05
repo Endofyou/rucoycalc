@@ -71,6 +71,27 @@
     }
 
     function calculation() {
+      
+      if (
+        base < 1 || base > 1000 ||
+        stat < 5 || stat > 1000 ||
+        equips < -50 || equips > 76 ||
+        att < 4 || att > 60 ||
+        crit < 0 || crit > 100 ||
+        critMulti < 1 || critMulti > 2 ||
+        magicMulti < 1 || magicMulti > 2
+      ) {
+        document.getElementById("resultsText1").innerHTML = "ERROR: Please ensure all fields are properly filled with valid entries."
+        document.getElementById("resultsText2").innerHTML = ""
+        return
+      }
+
+      if (targetEff < 1) {
+        document.getElementById("box1").innerHTML = 1
+      } else if (targetEff > 99) {
+        document.getElementById("box1").innerHTML = 99
+      }
+
       const base = +document.getElementById("box1").value
       const stat = +document.getElementById("box2").value
       const equips = +document.getElementById("box3").value
@@ -81,21 +102,6 @@
       const magicMulti = +document.getElementById("box8").value
       const ptrain = +document.getElementById("enablePt").checked ? true : false
       const magic = +document.getElementById("magePt").checked ? true : false
-
-      if (
-        base < 1 || base > 1000 ||
-        stat < 5 || stat > 1000 ||
-        equips < -50 || equips > 76 ||
-        att < 4 || att > 60 ||
-        targetEff < 0 || targetEff > 99 ||
-        crit < 0 || crit > 100 ||
-        critMulti < 1 || critMulti > 2 ||
-        magicMulti < 1 || magicMulti > 2
-      ) {
-        document.getElementById("resultsText1").innerHTML = "ERROR: Please ensure all fields are properly filled with valid entries."
-        document.getElementById("resultsText2").innerHTML = ""
-        return
-      }
 
       const totalStat = stat + equips
       const ticks = ptrain == true ? 38 : 10
@@ -182,7 +188,7 @@
         document.getElementById("resultsText1").innerHTML = "There are no mobs you can train at your level."
       }
       if (nextMob != 0) {
-        document.getElementById("resultsText2").innerHTML = " You can start training " + nextMob + " with " + targetEff + "% efficiency after " + reqStats + " more stat(s)."
+        document.getElementById("resultsText2").innerHTML = " You can start training " + nextMob + " with " + targetEff + "%+ efficiency after " + reqStats + " more stat(s)."
       } else {
         document.getElementById("resultsText2").innerHTML = ""
       }
