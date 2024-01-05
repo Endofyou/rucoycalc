@@ -38,6 +38,8 @@
 
     <div id="advancedBoxes">
       <p>target % efficiency: <input type="number" id="box5" value="90"></p>
+      <input type="checkbox" id="critRing">
+      <label for="critRing">Enable Crit Ring</label>
     </div>
     
   </div>
@@ -68,16 +70,16 @@
     }
 
     function calculation() {
-      let base = +document.getElementById("box1").value
-      let stat = +document.getElementById("box2").value
-      let equips = +document.getElementById("box3").value
-      let att = +document.getElementById("box4").value
-      let targetEff = +document.getElementById("box5").value
+      let base        = +document.getElementById("box1").value
+      let stat        = +document.getElementById("box2").value
+      let equips      = +document.getElementById("box3").value
+      let att         = +document.getElementById("box4").value
+      let targetEff   = +document.getElementById("box5").value
       
-      const crit = 0.01
-      const critMulti = 1.05
-      const ptrain = +document.getElementById("enablePt").checked ? true : false
-      const magic = +document.getElementById("magePt").checked ? true : false
+      const crit      = +document.getElementById("critRing").checked == true ? 0.035 : 0.01
+      const critMulti = +document.getElementById("critRing").checked == true ? 1.075 : 1.05
+      const ptrain    = +document.getElementById("enablePt").checked ? true : false
+      const magic     = +document.getElementById("magePt").checked ? true : false
       
       let errors = 0
       if (base < 1 || base > 1000) {
@@ -85,28 +87,28 @@
         document.getElementById("box1").value = ""
         errors++
       } else {
-        document.getElementById("box1").style.backgroundColor = "white"
+        document.getElementById("box1").style.backgroundColor = "#FFFFFF"
       }
       if (stat < 5 || stat > 1000) {
         document.getElementById("box2").style.backgroundColor = "#ff8080"
         document.getElementById("box2").value = ""
         errors++
       } else {
-        document.getElementById("box2").style.backgroundColor = "white"
+        document.getElementById("box2").style.backgroundColor = "#FFFFFF"
       }
       if (equips < -50 || equips > 76) {
         document.getElementById("box3").style.backgroundColor = "#ff8080"
         document.getElementById("box3").value = ""
         errors++
       } else {
-        document.getElementById("box3").style.backgroundColor = "white"
+        document.getElementById("box3").style.backgroundColor = "#FFFFFF"
       }
       if (att < 4 || att > 60) {
         document.getElementById("box4").style.backgroundColor = "#ff8080"
         document.getElementById("box4").value = ""
         errors++
       } else {
-        document.getElementById("box4").style.backgroundColor = "white"
+        document.getElementById("box4").style.backgroundColor = "#FFFFFF"
       }
 
       if (targetEff < 50) {
@@ -116,6 +118,8 @@
         document.getElementById("box5").value = "99"
         document.getElementById("box5").style.backgroundColor = "#ffff80"
         
+      } else {
+        document.getElementById("box5").style.backgroundColor = "#FFFFFF"
       }
       targetEff = +document.getElementById("box5").value
       
