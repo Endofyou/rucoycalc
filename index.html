@@ -70,18 +70,18 @@
     }
 
     function calculation() {
-      let base        = +document.getElementById("box1").value
-      let stat        = +document.getElementById("box2").value
-      let equips      = +document.getElementById("box3").value
-      let att         = +document.getElementById("box4").value
-      let targetEff   = +document.getElementById("box5").value
-      
+      const base      = +Math.floor(document.getElementById("box1").value)
+      const stat      = +Math.floor(document.getElementById("box2").value)
+      const equips    = +Math.floor(document.getElementById("box3").value)
+      const att       = +Math.floor(document.getElementById("box4").value)
       const crit      = +document.getElementById("critRing").checked == true ? 0.035 : 0.01
       const critMulti = +document.getElementById("critRing").checked == true ? 1.075 : 1.05
       const ptrain    = +document.getElementById("enablePt").checked ? true : false
       const magic     = +document.getElementById("magePt").checked ? true : false
-      
+
+      let targetEff   = +document.getElementById("box5").value
       let errors = 0
+      
       if (base < 1 || base > 1000) {
         document.getElementById("box1").style.backgroundColor = "#ff8080"
         document.getElementById("box1").value = ""
@@ -103,7 +103,7 @@
       } else {
         document.getElementById("box3").style.backgroundColor = "#FFFFFF"
       }
-      if (att < 4 || att > 60) {
+      if (att < 4 || att > 60 || att == 6 || att == 8 || att == 10 || att == 12 || att == 14) {
         document.getElementById("box4").style.backgroundColor = "#ff8080"
         document.getElementById("box4").value = ""
         errors++
