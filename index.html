@@ -10,16 +10,12 @@
 
 <body>
 
-  <div id="header">
-    <h1>Rucoy Training Calculator</h1>
-  </div>
-
-  <p id="description">
-    Input into the following fields the corresponding information to receive training insights.
-  </p>
+  <h1 id="header">Rucoy Training Calculator</h1>
+  
+  <p id="description">Input into the following fields the corresponding information to receive training insights.</p>
 
   <div id="mainContent">
-
+  
     <input type="checkbox" id="enablePt" onclick="enablePtrain()">
     <label for="enablePt">Enable Power Training</label>
 
@@ -28,10 +24,10 @@
       <label for="magePt">Enable Magic</label>
     </p>
 
-    <p>Base Level: <input type="number" id="box1" value=""></p>
-    <p>Skill Level: <input type="number" id="box2" value=""></p>
-    <p>Extra Equips: <input type="number" id="box3" value="0"></p>
-    <p>Weapon Attack: <input type="number" id="box4" value=""></p>
+    <p>Base Level:    <input type="number" id="box1" value="" ></p>
+    <p>Skill Level:   <input type="number" id="box2" value="" ></p>
+    <p>Extra Equips:  <input type="number" id="box3" value="0"></p>
+    <p>Weapon Attack: <input type="number" id="box4" value="" ></p>
 
     <input type="checkbox" id="advancedToggle" onclick="advancedOptions()">
     <label for="advancedToggle">Advanced Options</label>
@@ -76,8 +72,8 @@
       const att       = Math.floor(document.getElementById("box4").value)
       const crit      = document.getElementById("critRing").checked ? 0.035 : 0.01
       const critMulti = document.getElementById("critRing").checked ? 1.075 : 1.05
-      const ptrain    = document.getElementById("enablePt").checked ? true  : false
-      const magic     = document.getElementById("magePt"  ).checked ? true  : false
+      const ptrain    = document.getElementById("enablePt").checked
+      const magic     = document.getElementById("magePt"  ).checked
       
       document.getElementById("box1").value = base
       document.getElementById("box2").value = stat
