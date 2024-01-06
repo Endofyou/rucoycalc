@@ -84,28 +84,24 @@
       
       if (base < 1 || base > 1000) {
         document.getElementById("box1").style.backgroundColor = "#ff8080"
-        document.getElementById("box1").value = ""
         errors++
       } else {
         document.getElementById("box1").style.backgroundColor = "#FFFFFF"
       }
       if (stat < 5 || stat > 1000) {
         document.getElementById("box2").style.backgroundColor = "#ff8080"
-        document.getElementById("box2").value = ""
         errors++
       } else {
         document.getElementById("box2").style.backgroundColor = "#FFFFFF"
       }
       if (equips < -50 || equips > 76) {
         document.getElementById("box3").style.backgroundColor = "#ff8080"
-        document.getElementById("box3").value = ""
         errors++
       } else {
         document.getElementById("box3").style.backgroundColor = "#FFFFFF"
       }
       if (att < 4 || att > 60 || att == 6 || att == 8 || att == 10 || att == 12 || att == 14) {
         document.getElementById("box4").style.backgroundColor = "#ff8080"
-        document.getElementById("box4").value = ""
         errors++
       } else {
         document.getElementById("box4").style.backgroundColor = "#FFFFFF"
