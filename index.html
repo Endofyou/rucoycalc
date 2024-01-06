@@ -54,60 +54,73 @@
   <br id="bottomMargin">
 
   <script>
-    document.getElementById("mageToggle").style.display = "none"
+    document.getElementById("mageToggle"   ).style.display = "none"
     document.getElementById("advancedBoxes").style.display = "none"
 
     function enablePtrain() {
-      document.getElementById("enablePt").checked == true
+      document.getElementById("enablePt").checked
       ? document.getElementById("mageToggle").style.display = "block"
       : document.getElementById("mageToggle").style.display = "none"
     }
 
     function advancedOptions() {
-      document.getElementById("advancedToggle").checked == true
+      document.getElementById("advancedToggle").checked
       ? document.getElementById("advancedBoxes").style.display = "block"
       : document.getElementById("advancedBoxes").style.display = "none"
     }
 
     async function calculation() {
-      const base      = +Math.floor(document.getElementById("box1").value)
-      const stat      = +Math.floor(document.getElementById("box2").value)
-      const equips    = +Math.floor(document.getElementById("box3").value)
-      const att       = +Math.floor(document.getElementById("box4").value)
-      const crit      = +document.getElementById("critRing").checked == true ? 0.035 : 0.01
-      const critMulti = +document.getElementById("critRing").checked == true ? 1.075 : 1.05
-      const ptrain    = +document.getElementById("enablePt").checked ? true : false
-      const magic     = +document.getElementById("magePt").checked ? true : false
+      const base      = Math.floor(document.getElementById("box1").value)
+      const stat      = Math.floor(document.getElementById("box2").value)
+      const equips    = Math.floor(document.getElementById("box3").value)
+      const att       = Math.floor(document.getElementById("box4").value)
+      const crit      = document.getElementById("critRing").checked ? 0.035 : 0.01
+      const critMulti = document.getElementById("critRing").checked ? 1.075 : 1.05
+      const ptrain    = document.getElementById("enablePt").checked ? true  : false
+      const magic     = document.getElementById("magePt"  ).checked ? true  : false
+      
+      document.getElementById("box1").value = base
+      document.getElementById("box2").value = stat
+      document.getElementById("box3").value = equips
+      document.getElementById("box4").value = att
 
       let errors = 0
+      let error1 = error2 = error3 = error4 = ""
       if (base < 1 || base > 1000) {
         document.getElementById("box1").style.backgroundColor = "#ff8080"
+        error1 = "Box 1 value must range from 1 to 1000. "
         errors++
       } else {
         document.getElementById("box1").style.backgroundColor = "#FFFFFF"
       }
       if (stat < 5 || stat > 1000) {
         document.getElementById("box2").style.backgroundColor = "#ff8080"
+        error2 = "Box 2 value must range from 5 to 1000. "
         errors++
       } else {
         document.getElementById("box2").style.backgroundColor = "#FFFFFF"
       }
       if (equips < -50 || equips > 76) {
         document.getElementById("box3").style.backgroundColor = "#ff8080"
+        error3 = "Box 3 value must range from -50 to 76. "
         errors++
       } else {
         document.getElementById("box3").style.backgroundColor = "#FFFFFF"
       }
       if (att < 4 || att > 60 || att == 6 || att == 8 || att == 10 || att == 12 || att == 14) {
         document.getElementById("box4").style.backgroundColor = "#ff8080"
+        error4 = "Box 4 value must range from 4 to 60. "
         errors++
       } else {
         document.getElementById("box4").style.backgroundColor = "#FFFFFF"
       }
 
       let targetEff = +document.getElementById("box5").value
-      if (targetEff < 50) {
-        document.getElementById("box5").value = "50"
+      if (targetEff < 75 && document.getElementById("critRing").checked && ptrain) {
+        document.getElementById("box5").value = "75"
+        document.getElementById("box5").style.backgroundColor = "#ffff80"
+      } else if (targetEff < 35) {
+        document.getElementById("box5").value = "35"
         document.getElementById("box5").style.backgroundColor = "#ffff80"
       } else if (targetEff > 99) {
         document.getElementById("box5").value = "99"
@@ -119,7 +132,7 @@
       
       if (errors > 0) {
         document.getElementById("resultsText1").innerHTML = errors + (errors == 1 ? " ERROR:" : " ERRORS:") + " Please ensure all fields are properly filled with valid entries."
-        document.getElementById("resultsText2").innerHTML = ""
+        document.getElementById("resultsText2").innerHTML = error1 + error2 + error3 + error4
         return
       }
 
@@ -170,8 +183,8 @@
       ]
 
       const totalStat = stat + equips
-      const ticks = ptrain == true ? 38 : 10
-      const specMulti = (ptrain == true ? 1.5 * (magic == true ? 1.08 : 1) : 1)
+      const ticks = ptrain ? 38 : 10
+      const specMulti = (ptrain ? 1.5 * (magic ? 1.08 : 1) : 1)
       const min = specMulti * (Math.floor(base / 4) + att * totalStat / 20)
       const max = specMulti * (Math.floor(base / 4) + att * totalStat / 10)
       const avgCritMulti = 1 + (critMulti - 1) / 2
@@ -179,7 +192,7 @@
 
       let targetMob = nextMob = reqStats = duration = 0
       for (let i = 0; i < mobArray.length; i++) {
-        if (ptrain == true && mobArray[i].ptrain == false) { continue }
+        if (ptrain && mobArray[i].ptrain == false) { continue }
         const prob = Math.min((1 - crit) * (max - mobArray[i].def) / (max - min) + crit, 1)
         if (targetProb < prob) {
           const durationCheck = min < mobArray[i].def
@@ -219,7 +232,7 @@
       }
       
       if (targetMob != 0) {
-        document.getElementById("resultsText1").innerHTML = "You can effectively " + (ptrain == true ? "ptrain " : "train ") + targetMob + " for an average duration of " + minutes + ":" + seconds + "."
+        document.getElementById("resultsText1").innerHTML = "You can effectively " + (ptrain ? "ptrain " : "train ") + targetMob + " for an average duration of " + minutes + ":" + seconds + "."
       } else {
         document.getElementById("resultsText1").innerHTML = "There are no mobs you can train at your level."
       }
