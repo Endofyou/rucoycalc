@@ -70,15 +70,6 @@
     }
 
     async function calculation() {
-      window.scrollTo(0, document.body.scrollHeight)
-      
-      document.getElementById("resultsText1").innerHTML = "Loading"
-      document.getElementById("resultsText2").innerHTML = ""
-      for (let i = 0; i < 4; i++) {
-        await new Promise(t => setTimeout(t, 50))
-        document.getElementById("resultsText1").innerHTML += "."
-      }
-      
       const base      = +Math.floor(document.getElementById("box1").value)
       const stat      = +Math.floor(document.getElementById("box2").value)
       const equips    = +Math.floor(document.getElementById("box3").value)
@@ -136,6 +127,14 @@
         document.getElementById("resultsText1").innerHTML = errors + (errors == 1 ? " ERROR:" : " ERRORS:") + " Please ensure all fields are properly filled with valid entries."
         document.getElementById("resultsText2").innerHTML = ""
         return
+      }
+
+      window.scrollTo(0, document.body.scrollHeight)
+      document.getElementById("resultsText1").innerHTML = "Loading"
+      document.getElementById("resultsText2").innerHTML = ""
+      for (let i = 0; i < 4; i++) {
+        await new Promise(t => setTimeout(t, 50))
+        document.getElementById("resultsText1").innerHTML += "."
       }
 
       const mobArray = [
