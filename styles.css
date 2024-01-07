@@ -23,6 +23,10 @@ button {
   margin-top: 18px;
 } 
 
+#mageToggle, #advancedBoxes {
+  display: none;
+}
+
 #header {
   background-color: #367d5c;
   padding: 20px;
