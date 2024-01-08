@@ -52,7 +52,7 @@ async function calculation() {
   }
   if (att < 4 || att > 60 || att == 6 || att == 8 || att == 10 || att == 12 || att == 14) {
     d.getElementById("box4").style.backgroundColor = "#ff8080"
-    error4 = "Box 4 value must range from 4 to 60. "
+    error4 = "Box 4 value must be a valid weapon. "
     errors++
   } else {
     d.getElementById("box4").style.backgroundColor = "#FFFFFF"
