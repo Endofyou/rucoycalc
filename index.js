@@ -135,7 +135,7 @@ async function calculation() {
 
   let targetMob = nextMob = reqStats = duration = 0
   for (let i = 0; i < mobArray.length; i++) {
-    if (ptrain && mobArray[i].ptrain == false) { continue }
+    if (ptrain && !mobArray[i].ptrain) { continue }
     const prob = Math.min((1 - crit) * (max - mobArray[i].def) / (max - min) + crit, 1)
     if (targetProb < prob) {
       const durationCheck = min < mobArray[i].def
