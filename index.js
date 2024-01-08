@@ -180,7 +180,7 @@ async function calculation() {
     d.getElementById("resultsText1").innerHTML = "There are no mobs you can train at your level."
   }
   if (nextMob != 0) {
-    d.getElementById("resultsText2").innerHTML = " You can start training " + nextMob + " with " + targetEff + "%+ efficiency after " + reqStats + " more " + (reqStats == 1 ? "stat." : "stats.")
+    d.getElementById("resultsText2").innerHTML = "You can start training " + nextMob + " with " + targetEff + "%+ efficiency after " + reqStats + " more " + (reqStats == 1 ? "stat." : "stats.")
   } else {
     d.getElementById("resultsText2").innerHTML = ""
   }
