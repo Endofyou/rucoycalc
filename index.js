@@ -12,6 +12,24 @@ function advancedOptions() {
   : d.getElementById("advancedBoxes").style.display = "none"
 }
 
+async function fadeAnimation(n) {
+	d.getElementById("results").style.transition = "none"
+	switch(n) {
+		case 0:
+			d.getElementById("results").style.backgroundColor = "#94d1b5"
+			await new Promise(t => setTimeout(t, 0))
+			d.getElementById("results").style.backgroundColor = "#367d5c"
+			d.getElementById("results").style.transition = "0.8s"
+			break
+		case 1:
+			d.getElementById("results").style.backgroundColor = "#ff8080"
+			await new Promise(t => setTimeout(t, 200))
+			d.getElementById("results").style.backgroundColor = "#367d5c"
+			d.getElementById("results").style.transition = "1.8s"
+			break
+	}
+}
+
 async function calculation() {
   const base      = Math.floor(d.getElementById("box1").value)
   const stat      = Math.floor(d.getElementById("box2").value)
@@ -76,15 +94,10 @@ async function calculation() {
   if (errors > 0) {
     d.getElementById("resultsText1").innerHTML = errors + (errors == 1 ? " ERROR:" : " ERRORS:") + " Please ensure all fields are properly filled with valid entries."
     d.getElementById("resultsText2").innerHTML = error1 + error2 + error3 + error4
+		
+		fadeAnimation(1)
+		window.scrollTo(0, d.body.scrollHeight)
     return
-  }
-
-  window.scrollTo(0, d.body.scrollHeight)
-  d.getElementById("resultsText1").innerHTML = "Loading"
-  d.getElementById("resultsText2").innerHTML = ""
-  for (let i = 0; i < 4; i++) {
-    await new Promise(t => setTimeout(t, 50))
-    d.getElementById("resultsText1").innerHTML += "."
   }
 
   const mobArray = [
@@ -185,5 +198,6 @@ async function calculation() {
     d.getElementById("resultsText2").innerHTML = ""
   }
   
+	fadeAnimation(0)
   window.scrollTo(0, d.body.scrollHeight)
 }
