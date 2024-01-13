@@ -47,6 +47,10 @@ button {
   font-size: 110%;
 }
 
+#resultsText1, #resultsText2, #resultsText3, #resultsText4 {
+  margin: 10px;
+}
+
 #results {
   font-size: 120%;
   background-color: #367d5c;
@@ -56,8 +60,4 @@ button {
   margin-bottom: 60px;
   text-shadow: 0 1px 8px #173627;
   box-shadow: 0 10px 20px #242528;
-}
-
-#resultsText1, #resultsText2, #resultsText3 {
-  margin: 10px;
 }
