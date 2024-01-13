@@ -94,6 +94,8 @@ async function calculation() {
   if (errors > 0) {
     d.getElementById("resultsText1").innerHTML = errors + (errors == 1 ? " ERROR:" : " ERRORS:") + " Please ensure all fields are properly filled with valid entries."
     d.getElementById("resultsText2").innerHTML = error1 + error2 + error3 + error4
+		d.getElementById("resultsText3").innerHTML = ""
+		d.getElementById("resultsText4").innerHTML = ""
 		
 		fadeAnimation(1)
 		window.scrollTo(0, d.body.scrollHeight)
@@ -146,7 +148,7 @@ async function calculation() {
   const avgCritMulti = 1 + (critMulti - 1) / 2
   const targetProb = 1 - ((100 - targetEff) / 100) ** (1 / ticks)
 
-  let targetMob = nextMob = reqStats = duration = 0
+  let targetMob = targetMobDef = nextMob = nextMobDef = statsFor1Dmg = reqStats = duration = 0
   for (let i = 0; i < mobArray.length; i++) {
     if (ptrain && !mobArray[i].ptrain) { continue }
     const prob = Math.min((1 - crit) * (max - mobArray[i].def) / (max - min) + crit, 1)
@@ -163,15 +165,20 @@ async function calculation() {
       if (duration < durationCheck) {
         duration = durationCheck
         targetMob = mobArray[i].name
+				targetMobDef = mobArray[i].def
       } else if (duration == durationCheck) {
         targetMob += " & " + mobArray[i].name
       }
     } else {
       nextMob = mobArray[i].name
+			nextMobDef = mobArray[i].def
       reqStats = Math.ceil(
         (20 * mobArray[i].def - 20 * Math.floor(base / 4) * specMulti) /
         (att * specMulti * (2 - (targetProb - crit) / (1 - crit)))
         ) - totalStat
+			statsFor1Dmg = Math.ceil(
+				10 * ((1 + nextMobDef) / specMulti - Math.floor(base / 4)) / att
+				)
       break
     }
   }
@@ -189,13 +196,19 @@ async function calculation() {
   
   if (targetMob != 0) {
     d.getElementById("resultsText1").innerHTML = "You can effectively " + (ptrain ? "ptrain " : "train ") + targetMob + " for an average duration of " + minutes + ":" + seconds + "."
+		d.getElementById("resultsText2").innerHTML = "You can deal " + (Math.floor(max) - targetMobDef) + " max damage and " + (Math.floor(max * critMulti) - targetMobDef) + " max critical damage."
   } else {
     d.getElementById("resultsText1").innerHTML = "There are no mobs you can train at your level."
+		d.getElementById("resultsText2").innerHTML = ""
   }
   if (nextMob != 0) {
-    d.getElementById("resultsText2").innerHTML = "You can start training " + nextMob + " with " + targetEff + "%+ efficiency after " + reqStats + " more " + (reqStats == 1 ? "stat." : "stats.")
-  } else {
-    d.getElementById("resultsText2").innerHTML = ""
+    d.getElementById("resultsText3").innerHTML = "You can start training " + nextMob + " with " + targetEff + "%+ efficiency after " + reqStats + " more " + (reqStats == 1 ? "stat." : "stats.")
+		d.getElementById("resultsText4").innerHTML = "You can deal " + ((max - nextMobDef) >= 1
+			? ((Math.floor(max) - nextMobDef) + " max damage.")
+			: (" 1 max damage in " + (statsFor1Dmg - totalStat) + " more stat" + ((statsFor1Dmg - totalStat) > 1 ? "s." : ".")))
+	} else {
+    d.getElementById("resultsText3").innerHTML = ""
+		d.getElementById("resultsText4").innerHTML = ""
   }
   
 	fadeAnimation(0)
