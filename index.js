@@ -13,8 +13,8 @@ function advancedOptions() {
 }
 
 async function fadeAnimation(n) {
-	d.getElementById("results").style.transition = "none"
-	switch(n) {
+  d.getElementById("results").style.transition = "none"
+  switch(n) {
   case 0:
     d.getElementById("results").style.backgroundColor = "#94d1b5"
     await new Promise(t => setTimeout(t, 0))
