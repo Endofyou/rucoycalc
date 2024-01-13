@@ -15,19 +15,19 @@ function advancedOptions() {
 async function fadeAnimation(n) {
 	d.getElementById("results").style.transition = "none"
 	switch(n) {
-		case 0:
-			d.getElementById("results").style.backgroundColor = "#94d1b5"
-			await new Promise(t => setTimeout(t, 0))
-			d.getElementById("results").style.backgroundColor = "#367d5c"
-			d.getElementById("results").style.transition = "0.8s"
-			break
-		case 1:
-			d.getElementById("results").style.backgroundColor = "#ff8080"
-			await new Promise(t => setTimeout(t, 200))
-			d.getElementById("results").style.backgroundColor = "#367d5c"
-			d.getElementById("results").style.transition = "1.8s"
-			break
-	}
+  case 0:
+    d.getElementById("results").style.backgroundColor = "#94d1b5"
+    await new Promise(t => setTimeout(t, 0))
+    d.getElementById("results").style.backgroundColor = "#367d5c"
+    d.getElementById("results").style.transition = "0.8s"
+    break
+  case 1:
+    d.getElementById("results").style.backgroundColor = "#ff8080"
+    await new Promise(t => setTimeout(t, 200))
+    d.getElementById("results").style.backgroundColor = "#367d5c"
+    d.getElementById("results").style.transition = "1.8s"
+    break
+  }
 }
 
 async function calculation() {
@@ -94,11 +94,11 @@ async function calculation() {
   if (errors > 0) {
     d.getElementById("resultsText1").innerHTML = errors + (errors == 1 ? " ERROR:" : " ERRORS:") + " Please ensure all fields are properly filled with valid entries."
     d.getElementById("resultsText2").innerHTML = error1 + error2 + error3 + error4
-		d.getElementById("resultsText3").innerHTML = ""
-		d.getElementById("resultsText4").innerHTML = ""
-		
-		fadeAnimation(1)
-		window.scrollTo(0, d.body.scrollHeight)
+    d.getElementById("resultsText3").innerHTML = ""
+    d.getElementById("resultsText4").innerHTML = ""
+
+    fadeAnimation(1)
+    window.scrollTo(0, d.body.scrollHeight)
     return
   }
 
@@ -138,7 +138,7 @@ async function calculation() {
     { name:           "Minotaur Lv.225", def: 511, hp: 4250, ptrain:  true },
     { name:           "Minotaur Lv.250", def: 601, hp: 5000, ptrain:  true },
     { name:           "Minotaur Lv.275", def: 691, hp: 5750, ptrain:  true },
-  ]
+    ]
 
   const totalStat = stat + equips
   const ticks = ptrain ? 38 : 10
@@ -151,7 +151,7 @@ async function calculation() {
   let targetMob = targetMobDef = nextMob = nextMobDef = statsFor1Dmg = reqStats = duration = 0
   for (let i = 0; i < mobArray.length; i++) {
     if (ptrain && !mobArray[i].ptrain) { continue }
-    const prob = Math.min((1 - crit) * (max - mobArray[i].def) / (max - min) + crit, 1)
+      const prob = Math.min((1 - crit) * (max - mobArray[i].def) / (max - min) + crit, 1)
     if (targetProb < prob) {
       const durationCheck = min < mobArray[i].def
       ? mobArray[i].hp / (
@@ -165,20 +165,20 @@ async function calculation() {
       if (duration < durationCheck) {
         duration = durationCheck
         targetMob = mobArray[i].name
-				targetMobDef = mobArray[i].def
+        targetMobDef = mobArray[i].def
       } else if (duration == durationCheck) {
         targetMob += " & " + mobArray[i].name
       }
     } else {
       nextMob = mobArray[i].name
-			nextMobDef = mobArray[i].def
+      nextMobDef = mobArray[i].def
       reqStats = Math.ceil(
         (20 * mobArray[i].def - 20 * Math.floor(base / 4) * specMulti) /
         (att * specMulti * (2 - (targetProb - crit) / (1 - crit)))
         ) - totalStat
-			statsFor1Dmg = Math.ceil(
-				10 * ((1 + nextMobDef) / specMulti - Math.floor(base / 4)) / att
-				)
+      statsFor1Dmg = Math.ceil(
+        10 * ((1 + nextMobDef) / specMulti - Math.floor(base / 4)) / att
+        )
       break
     }
   }
@@ -196,21 +196,21 @@ async function calculation() {
   
   if (targetMob != 0) {
     d.getElementById("resultsText1").innerHTML = "You can effectively " + (ptrain ? "ptrain " : "train ") + targetMob + " for an average duration of " + minutes + ":" + seconds + "."
-		d.getElementById("resultsText2").innerHTML = "You can deal " + (Math.floor(max) - targetMobDef) + " max damage and " + (Math.floor(max * critMulti) - targetMobDef) + " max critical damage."
+    d.getElementById("resultsText2").innerHTML = "You can deal " + (Math.floor(max) - targetMobDef) + " max damage and " + (Math.floor(max * critMulti) - targetMobDef) + " max critical damage."
   } else {
     d.getElementById("resultsText1").innerHTML = "There are no mobs you can train at your level."
-		d.getElementById("resultsText2").innerHTML = ""
+    d.getElementById("resultsText2").innerHTML = ""
   }
   if (nextMob != 0) {
     d.getElementById("resultsText3").innerHTML = "You can start training " + nextMob + " with " + targetEff + "%+ efficiency after " + reqStats + " more " + (reqStats == 1 ? "stat." : "stats.")
-		d.getElementById("resultsText4").innerHTML = (max - nextMobDef) >= 1
-			? "You can deal " + (Math.floor(max) - nextMobDef) + " max damage to " + nextMob + "."
-			: "You need " + (statsFor1Dmg - totalStat) + " more stat" + ((statsFor1Dmg - totalStat) > 1 ? "s" : "") + " in order to deal 1 max damage to " + nextMob + "."
-	} else {
+    d.getElementById("resultsText4").innerHTML = (max - nextMobDef) >= 1
+    ? "You can deal " + (Math.floor(max) - nextMobDef) + " max damage to " + nextMob + "."
+    : "You need " + (statsFor1Dmg - totalStat) + " more stat" + ((statsFor1Dmg - totalStat) > 1 ? "s" : "") + " in order to deal 1 max damage to " + nextMob + "."
+  } else {
     d.getElementById("resultsText3").innerHTML = ""
-		d.getElementById("resultsText4").innerHTML = ""
+    d.getElementById("resultsText4").innerHTML = ""
   }
   
-	fadeAnimation(0)
+  fadeAnimation(0)
   window.scrollTo(0, d.body.scrollHeight)
 }
