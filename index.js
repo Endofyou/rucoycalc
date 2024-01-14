@@ -66,7 +66,7 @@ async function calculation() {
     error3 = "Box 3 value must range from -50 to 76. "
     errors++
   } else {
-    document.getElementById("box3").style.backgroundColor = "#FFFFFF"
+    d.getElementById("box3").style.backgroundColor = "#FFFFFF"
   }
   if (att < 4 || att > 60 || att == 6 || att == 8 || att == 10 || att == 12 || att == 14) {
     d.getElementById("box4").style.backgroundColor = "#ff8080"
