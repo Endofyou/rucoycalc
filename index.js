@@ -2,31 +2,31 @@ const d = document
 
 function enablePtrain() {
   d.getElementById("enablePt").checked
-  ? d.getElementById("mageToggle").style.display = "block"
-  : d.getElementById("mageToggle").style.display = "none"
+    ? d.getElementById("mageToggle").style.display = "block"
+    : d.getElementById("mageToggle").style.display = "none"
 }
 
 function advancedOptions() {
   d.getElementById("advancedToggle").checked
-  ? d.getElementById("advancedBoxes").style.display = "block"
-  : d.getElementById("advancedBoxes").style.display = "none"
+    ? d.getElementById("advancedBoxes").style.display = "block"
+    : d.getElementById("advancedBoxes").style.display = "none"
 }
 
 async function fadeAnimation(n) {
   d.getElementById("results").style.transition = "none"
   switch(n) {
-  case 0:
-    d.getElementById("results").style.backgroundColor = "#94d1b5"
-    await new Promise(t => setTimeout(t, 0))
-    d.getElementById("results").style.backgroundColor = "#367d5c"
-    d.getElementById("results").style.transition = "0.8s"
-    break
-  case 1:
-    d.getElementById("results").style.backgroundColor = "#ff8080"
-    await new Promise(t => setTimeout(t, 200))
-    d.getElementById("results").style.backgroundColor = "#367d5c"
-    d.getElementById("results").style.transition = "1.8s"
-    break
+    case 0:
+      d.getElementById("results").style.backgroundColor = "#94d1b5"
+      await new Promise(t => setTimeout(t, 0))
+      d.getElementById("results").style.backgroundColor = "#367d5c"
+      d.getElementById("results").style.transition = "0.8s"
+      break
+    case 1:
+      d.getElementById("results").style.backgroundColor = "#ff8080"
+      await new Promise(t => setTimeout(t, 200))
+      d.getElementById("results").style.backgroundColor = "#367d5c"
+      d.getElementById("results").style.transition = "1.8s"
+      break
   }
 }
 
@@ -140,27 +140,27 @@ async function calculation() {
     { name:           "Minotaur Lv.275", def: 691, hp: 5750, ptrain:  true },
     ]
 
-  const totalStat = stat + equips
-  const ticks = ptrain ? 38 : 10
-  const specMulti = (ptrain ? 1.5 * (magic ? 1.08 : 1) : 1)
-  const min = specMulti * (Math.floor(base / 4) + att * totalStat / 20)
-  const max = specMulti * (Math.floor(base / 4) + att * totalStat / 10)
+  const totalStat    = stat + equips
+  const ticks        = ptrain ? 38 : 10
+  const specMulti    = (ptrain ? 1.5 * (magic ? 1.08 : 1) : 1)
+  const min          = specMulti * (Math.floor(base / 4) + att * totalStat / 20)
+  const max          = specMulti * (Math.floor(base / 4) + att * totalStat / 10)
   const avgCritMulti = 1 + (critMulti - 1) / 2
-  const targetProb = 1 - ((100 - targetEff) / 100) ** (1 / ticks)
+  const targetProb   = 1 - ((100 - targetEff) / 100) ** (1 / ticks)
 
   let targetMob = targetMobDef = nextMob = nextMobDef = statsFor1Dmg = reqStats = duration = 0
   for (let i = 0; i < mobArray.length; i++) {
     if (ptrain && !mobArray[i].ptrain) { continue }
-      const prob = Math.min((1 - crit) * (max - mobArray[i].def) / (max - min) + crit, 1)
+    const prob = Math.min((1 - crit) * (max - mobArray[i].def) / (max - min) + crit, 1)
     if (targetProb < prob) {
       const durationCheck = min < mobArray[i].def
-      ? mobArray[i].hp / (
-        crit * (max * avgCritMulti - mobArray[i].def) +
-        (1 - crit) * (max - mobArray[i].def) * prob / 2
+        ? mobArray[i].hp / (
+          crit * (max * avgCritMulti - mobArray[i].def) +
+            (1 - crit) * (max - mobArray[i].def) * prob / 2
         )
-      : mobArray[i].hp / (
-        crit * (max * avgCritMulti - mobArray[i].def) +
-        (1 - crit) * (max + min - 2 * mobArray[i].def) / 2
+        : mobArray[i].hp / (
+          crit * (max * avgCritMulti - mobArray[i].def) +
+            (1 - crit) * (max + min - 2 * mobArray[i].def) / 2
         )
       if (duration < durationCheck) {
         duration = durationCheck
@@ -174,11 +174,11 @@ async function calculation() {
       nextMobDef = mobArray[i].def
       reqStats = Math.ceil(
         (20 * mobArray[i].def - 20 * Math.floor(base / 4) * specMulti) /
-        (att * specMulti * (2 - (targetProb - crit) / (1 - crit)))
-        ) - totalStat
+          (att * specMulti * (2 - (targetProb - crit) / (1 - crit)))
+      ) - totalStat
       statsFor1Dmg = Math.ceil(
         10 * ((1 + nextMobDef) / specMulti - Math.floor(base / 4)) / att
-        )
+      )
       break
     }
   }
