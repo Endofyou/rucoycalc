@@ -202,11 +202,13 @@ async function calculation() {
     d.getElementById("resultsText2").innerHTML = ""
   }
   if (nextMob != 0) {
+    d.getElementById("divider").style.display = "block"
     d.getElementById("resultsText3").innerHTML = "You can start training " + nextMob + " with " + targetEff + "%+ efficiency after " + reqStats + " more " + (reqStats == 1 ? "stat." : "stats.")
     d.getElementById("resultsText4").innerHTML = (max - nextMobDef) >= 1
     ? "You can deal " + (Math.floor(max) - nextMobDef) + " max damage to " + nextMob + "."
     : "You need " + (statsFor1Dmg - totalStat) + " more stat" + ((statsFor1Dmg - totalStat) > 1 ? "s" : "") + " in order to deal 1 max damage to " + nextMob + "."
   } else {
+    d.getElementById("divider").style.display = "none"
     d.getElementById("resultsText3").innerHTML = ""
     d.getElementById("resultsText4").innerHTML = ""
   }
