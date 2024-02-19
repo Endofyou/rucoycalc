@@ -26,7 +26,7 @@ button {
   margin-top: 18px;
 } 
 
-#mageToggle, #advancedBoxes {
+#mageToggle, #advancedBoxes, #divider {
   display: none;
 }
 
@@ -45,6 +45,12 @@ button {
 
 #mainContent {
   font-size: 110%;
+}
+
+#divider {
+  margin: 20px auto;
+  border-top: 2px solid #d9f2e6;
+  max-width: 400px;
 }
 
 #resultsText1, #resultsText2, #resultsText3, #resultsText4 {
