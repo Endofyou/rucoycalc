@@ -26,7 +26,7 @@ button {
   margin-top: 18px;
 } 
 
-#mageToggle, #advancedBoxes, #divider {
+#instructions, #divider1, #mageToggle, #advancedBoxes {
   display: none;
 }
 
@@ -40,17 +40,32 @@ button {
 
 #description {
   font-size: 120%;
-  padding: 15px;
+  padding-top: 15px;
+  padding-bottom: 5px;
+}
+
+#instToggle {
+  margin-bottom: 40px;
 }
 
 #mainContent {
   font-size: 110%;
+  padding: 10px;
+  max-width: 900px;
+  margin: auto;
 }
 
-#divider {
+#divider1 {
+  margin: 35px auto;
+  border-top: 2px solid #d9f2e6;
+  max-width: 400px;
+}
+
+#divider2 {
   margin: 20px auto;
   border-top: 2px solid #d9f2e6;
   max-width: 400px;
+  display: none;
 }
 
 #resultsText1, #resultsText2, #resultsText3, #resultsText4 {
@@ -62,7 +77,7 @@ button {
   background-color: #367d5c;
   text-align: center;
   padding: 10px;
-  margin-top: 40px;
+  margin-top: 50px;
   margin-bottom: 60px;
   text-shadow: 0 1px 8px #173627;
   box-shadow: 0 10px 20px #242528;
