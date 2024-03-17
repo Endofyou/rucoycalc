@@ -1,5 +1,11 @@
 const d = document
 
+function instructions() {
+  d.getElementById("instToggle").checked
+    ? d.getElementById("instructions").style.display = d.getElementById("divider1").style.display = "block"
+    : d.getElementById("instructions").style.display = d.getElementById("divider1").style.display = "none"
+}
+
 function enablePtrain() {
   d.getElementById("enablePt").checked
     ? d.getElementById("mageToggle").style.display = "block"
@@ -94,6 +100,7 @@ async function calculation() {
   if (errors > 0) {
     d.getElementById("resultsText1").innerHTML = errors + (errors == 1 ? " ERROR:" : " ERRORS:") + " Please ensure all fields are properly filled with valid entries."
     d.getElementById("resultsText2").innerHTML = error1 + error2 + error3 + error4
+    d.getElementById("divider2").style.display = "none"
     d.getElementById("resultsText3").innerHTML = ""
     d.getElementById("resultsText4").innerHTML = ""
 
@@ -202,13 +209,13 @@ async function calculation() {
     d.getElementById("resultsText2").innerHTML = ""
   }
   if (nextMob != 0) {
-    d.getElementById("divider").style.display = "block"
+    d.getElementById("divider2").style.display = "block"
     d.getElementById("resultsText3").innerHTML = "You can start training " + nextMob + " with " + targetEff + "%+ efficiency after " + reqStats + " more " + (reqStats == 1 ? "stat." : "stats.")
     d.getElementById("resultsText4").innerHTML = (max - nextMobDef) >= 1
     ? "You can deal " + (Math.floor(max) - nextMobDef) + " max damage to " + nextMob + "."
     : "You need " + (statsFor1Dmg - totalStat) + " more stat" + ((statsFor1Dmg - totalStat) > 1 ? "s" : "") + " in order to deal 1 max damage to " + nextMob + "."
   } else {
-    d.getElementById("divider").style.display = "none"
+    d.getElementById("divider2").style.display = "none"
     d.getElementById("resultsText3").innerHTML = ""
     d.getElementById("resultsText4").innerHTML = ""
   }
