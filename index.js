@@ -2,8 +2,8 @@ const d = document
 
 function instructions() {
   d.getElementById("instToggle").checked
-    ? d.getElementById("instructions").style.display = d.getElementById("divider1").style.display = "block"
-    : d.getElementById("instructions").style.display = d.getElementById("divider1").style.display = "none"
+    ? d.getElementById("instructions").style.display = "block"
+    : d.getElementById("instructions").style.display = "none"
 }
 
 function enablePtrain() {
