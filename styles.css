@@ -26,7 +26,7 @@ button {
   margin-top: 18px;
 } 
 
-#instructions, #divider1, #mageToggle, #advancedBoxes {
+#instructions, #mageToggle, #advancedBoxes {
   display: none;
 }
 
@@ -44,10 +44,6 @@ button {
   padding-bottom: 5px;
 }
 
-#instToggle {
-  margin-bottom: 40px;
-}
-
 #mainContent {
   font-size: 110%;
   padding: 10px;
@@ -56,7 +52,7 @@ button {
 }
 
 #divider1 {
-  margin: 35px auto;
+  margin: 25px auto;
   border-top: 2px solid #d9f2e6;
   max-width: 400px;
 }
