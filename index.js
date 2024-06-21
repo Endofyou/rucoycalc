@@ -150,8 +150,8 @@ async function calculation() {
   const totalStat    = stat + equips
   const ticks        = ptrain ? 38 : 10
   const specMulti    = (ptrain ? 1.5 * (magic ? 1.08 : 1) : 1)
-  const min          = specMulti * (Math.floor(base / 4) + att * totalStat / 20)
-  const max          = specMulti * (Math.floor(base / 4) + att * totalStat / 10)
+  const min          = specMulti * (base / 4 + att * totalStat / 20)
+  const max          = specMulti * (base / 4 + att * totalStat / 10)
   const avgCritMulti = 1 + (critMulti - 1) / 2
   const targetProb   = 1 - ((100 - targetEff) / 100) ** (1 / ticks)
 
@@ -180,11 +180,11 @@ async function calculation() {
       nextMob = mobArray[i].name
       nextMobDef = mobArray[i].def
       reqStats = Math.ceil(
-        (20 * mobArray[i].def - 20 * Math.floor(base / 4) * specMulti) /
+        (20 * mobArray[i].def - 20 * base / 4 * specMulti) /
           (att * specMulti * (2 - (targetProb - crit) / (1 - crit)))
       ) - totalStat
       statsFor1Dmg = Math.ceil(
-        10 * ((1 + nextMobDef) / specMulti - Math.floor(base / 4)) / att
+        10 * ((1 + nextMobDef) / specMulti - base / 4) / att
       )
       break
     }
