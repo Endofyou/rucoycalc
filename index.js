@@ -155,11 +155,12 @@ async function calculation() {
   const avgCritMulti = 1 + (critMulti - 1) / 2
   const targetProb   = 1 - ((100 - targetEff) / 100) ** (1 / ticks)
 
-  let targetMob = targetMobDef = nextMob = nextMobDef = statsFor1Dmg = reqStats = duration = 0
+  let targetMob = targetMobDef = nextMob = nextMobDef = statsFor1Dmg = reqStats = duration = finalProb = 0
   for (let i = 0; i < mobArray.length; i++) {
     if (ptrain && !mobArray[i].ptrain) { continue }
     const prob = Math.min((1 - crit) * (max - mobArray[i].def) / (max - min) + crit, 1)
     if (targetProb < prob) {
+      finalProb = 100 - 100 * (1 - prob) ** ticks
       const durationCheck = min < mobArray[i].def
         ? mobArray[i].hp / (
           crit * (max * avgCritMulti - mobArray[i].def) +
@@ -202,7 +203,7 @@ async function calculation() {
   }
   
   if (targetMob != 0) {
-    d.getElementById("resultsText1").innerHTML = "You can effectively " + (ptrain ? "ptrain " : "train ") + targetMob + " for an average duration of " + minutes + ":" + seconds + "."
+    d.getElementById("resultsText1").innerHTML = "You can " + (ptrain ? "ptrain " : "train ") + targetMob + " with " + finalProb.toFixed(1) + "% efficiency" + " for an average duration of " + minutes + ":" + seconds + "."
     d.getElementById("resultsText2").innerHTML = "You can deal " + (Math.floor(max) - targetMobDef) + " max damage and " + (Math.floor(max * critMulti) - targetMobDef) + " max critical damage."
   } else {
     d.getElementById("resultsText1").innerHTML = "There are no mobs you can train at your level."
