@@ -207,7 +207,7 @@ async function calculation() {
   if (targetMob != 0) {
     d.getElementById("rt1_1").innerHTML = "You can " + (ptrain ? "ptrain " : "train ") + targetMob + " with "
     d.getElementById("rt1_2").innerHTML = finalProb.toFixed(1) + "%"
-    d.getElementById("rt1_2").style.color = "hsl(" + Math.max(0, 4.8 * (finalProb.toFixed(1) - 75)) + " 100% 50%)"
+    d.getElementById("rt1_2").style.color = "hsl(" + Math.max(0, 4.8 * (finalProb.toFixed(1) - 75)) + " 100% 60%)"
     d.getElementById("rt1_3").innerHTML = " efficiency" + " for an average duration of " + minutes + ":" + seconds + "."
     d.getElementById("resultsText2").innerHTML = "You can deal " + (Math.floor(max) - targetMobDef) + " max damage and " + (Math.floor(max * critMulti) - targetMobDef) + " max critical damage."
   } else {
