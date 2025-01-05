@@ -98,7 +98,9 @@ async function calculation() {
   targetEff = d.getElementById("box5").value
   
   if (errors > 0) {
-    d.getElementById("resultsText1").innerHTML = errors + (errors == 1 ? " ERROR:" : " ERRORS:") + " Please ensure all fields are properly filled with valid entries."
+    d.getElementById("rt1_1").innerHTML = errors + (errors == 1 ? " ERROR:" : " ERRORS:") + " Please ensure all fields are properly filled with valid entries."
+    d.getElementById("rt1_2").innerHTML = ""
+    d.getElementById("rt1_3").innerHTML = ""
     d.getElementById("resultsText2").innerHTML = error1 + error2 + error3 + error4
     d.getElementById("divider2").style.display = "none"
     d.getElementById("resultsText3").innerHTML = ""
@@ -203,10 +205,15 @@ async function calculation() {
   }
   
   if (targetMob != 0) {
-    d.getElementById("resultsText1").innerHTML = "You can " + (ptrain ? "ptrain " : "train ") + targetMob + " with " + finalProb.toFixed(1) + "% efficiency" + " for an average duration of " + minutes + ":" + seconds + "."
+    d.getElementById("rt1_1").innerHTML = "You can " + (ptrain ? "ptrain " : "train ") + targetMob + " with "
+    d.getElementById("rt1_2").innerHTML = finalProb.toFixed(1) + "%"
+    d.getElementById("rt1_2").style.color = "hsl(" + Math.max(0, 4.8 * (finalProb.toFixed(1) - 75)) + " 100% 50%)"
+    d.getElementById("rt1_3").innerHTML = " efficiency" + " for an average duration of " + minutes + ":" + seconds + "."
     d.getElementById("resultsText2").innerHTML = "You can deal " + (Math.floor(max) - targetMobDef) + " max damage and " + (Math.floor(max * critMulti) - targetMobDef) + " max critical damage."
   } else {
-    d.getElementById("resultsText1").innerHTML = "There are no mobs you can train at your level."
+    d.getElementById("rt1_1").innerHTML = "There are no mobs you can train at your level."
+    d.getElementById("rt1_2").innerHTML = ""
+    d.getElementById("rt1_3").innerHTML = ""
     d.getElementById("resultsText2").innerHTML = ""
   }
   if (nextMob != 0) {
