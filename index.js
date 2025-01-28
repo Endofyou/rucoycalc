@@ -52,7 +52,8 @@ async function calculation() {
   d.getElementById("box4").value = att
 
   let errors = 0
-  let error1 = error2 = error3 = error4 = ""
+  let error1, error2, error3, error4
+  error1 = error2 = error3 = error4 = ""
   if (base < 1 || base > 1000) {
     d.getElementById("box1").style.backgroundColor = "#ff8080"
     error1 = "Box 1 value must range from 1 to 1000. "
@@ -157,7 +158,8 @@ async function calculation() {
   const avgCritMulti = 1 + (critMulti - 1) / 2
   const targetProb   = 1 - ((100 - targetEff) / 100) ** (1 / ticks)
 
-  let targetMob = targetMobDef = nextMob = nextMobDef = statsFor1Dmg = reqStats = duration = finalProb = 0
+  let targetMob, targetMobDef, nextMob, nextMobDef, statsFor1Dmg, reqStats, duration, finalProb
+  targetMob = targetMobDef = nextMob = nextMobDef = statsFor1Dmg = reqStats = duration = finalProb = 0
   for (let i = 0; i < mobArray.length; i++) {
     if (ptrain && !mobArray[i].ptrain) { continue }
     const prob = Math.min((1 - crit) * (max - mobArray[i].def) / (max - min) + crit, 1)
