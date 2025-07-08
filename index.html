@@ -52,7 +52,7 @@
 
     <p>Base Level: <input type="number" id="box1" value="" ></p>
     <p>Stat Level: <input type="number" id="box2" value="" ></p>
-    <p>Extra Equips: <input type="number" id="box3" value="0"></p>
+    <p>Extra Equips: <input type="number" id="box3" value="0"><button id="signsButton" type="button" onclick="switchSigns()">±</button></p>
     <p><span class="notranslate">Attack </span>of Weapon: <input type="number" id="box4" value="" ></p>
 
     <input type="checkbox" id="advancedToggle" onclick="advancedOptions()">
@@ -66,7 +66,7 @@
     
   </div>
 
-  <p><button type="button" onclick="calculation()">Calculate</button></p>
+  <p><button id="calcButton" type="button" onclick="calculation()">Calculate</button></p>
 
   <div id="results">
     <div id="resultsText1">
