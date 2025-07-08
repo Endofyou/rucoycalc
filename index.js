@@ -36,6 +36,10 @@ async function fadeAnimation(n) {
   }
 }
 
+function switchSigns() {
+  d.getElementById("box3").value *= -1
+}
+
 async function calculation() {
   const base      = Math.floor(d.getElementById("box1").value)
   const stat      = Math.floor(d.getElementById("box2").value)
