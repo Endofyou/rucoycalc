@@ -30,6 +30,10 @@ input[type='number'] {
   margin-top: 18px;
 }
 
+#enablePt {
+  font-size: 14px;
+}
+
 #instructions, #mageToggle, #advancedBoxes {
   display: none;
 }
