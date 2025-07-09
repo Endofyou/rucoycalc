@@ -49,11 +49,27 @@
       <input type="checkbox" id="magePt">
       <label for="magePt"><span class="notranslate">Magic </span>User</label>
     </p>
-
-    <p>Base Level: <input type="number" id="box1" value="" ></p>
-    <p>Stat Level: <input type="number" id="box2" value="" ></p>
-    <p>Extra Stats: <input type="number" id="box3" value="0"><button id="signsButton" type="button" onclick="switchSigns()">±</button></p>
-    <p><span class="notranslate">Attack </span>of Weapon: <input type="number" id="box4" value="" ></p>
+    
+    <div id="mainTable">
+      <table>
+        <tr id="topRow">
+          <td class="column1">Base Level: </td>
+          <td class="column2"><input type="number" id="box1" value="" ></td>
+        </tr>
+        <tr>
+          <td class="column1">Stat Level: </td>
+          <td class="column2"><input type="number" id="box2" value="" ></td>
+        </tr>
+        <tr>
+          <td class="column1">Extra Stats: </td>
+          <td class="column2"><button id="signsButton" type="button" onclick="switchSigns()">±</button><input type="number" id="box3" value="0"></td>
+        </tr>
+        <tr>
+          <td class="column1"><span class="notranslate">Attack </span>of Weapon: </td>
+          <td class="column2"><input type="number" id="box4" value="" ></td>
+        </tr>
+      </table>
+    </div>
 
     <input type="checkbox" id="advancedToggle" onclick="advancedOptions()">
     <label for="advancedToggle">Advanced Options</label>
