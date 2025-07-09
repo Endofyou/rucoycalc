@@ -6,12 +6,12 @@ function instructions() {
     : d.getElementById("instructions").style.display = "none"
 }
 
-function enablePtrain() {
-  d.getElementById("enablePt").checked
+function enablePtrain(isEnabled) {
+  isEnabled
     ? d.getElementById("mageToggle").style.display = "block"
     : d.getElementById("mageToggle").style.display = "none"
 }
-
+d.getElementById("enablePt").selectedIndex
 function advancedOptions() {
   d.getElementById("advancedToggle").checked
     ? d.getElementById("advancedBoxes").style.display = "block"
@@ -47,7 +47,7 @@ async function calculation() {
   const att       = Math.floor(d.getElementById("box4").value)
   const crit      = d.getElementById("critRing").checked ? 0.035 : 0.01
   const critMulti = d.getElementById("critRing").checked ? 1.075 : 1.05
-  const ptrain    = d.getElementById("enablePt").checked
+  const ptrain    = d.getElementById("enablePt").selectedIndex
   const magic     = d.getElementById("magePt"  ).checked
   
   d.getElementById("box1").value = base
