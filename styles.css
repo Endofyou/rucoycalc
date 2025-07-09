@@ -20,7 +20,7 @@ input[type='number'] {
 }
 
 #signsButton {
-  margin-left: 5px;
+  margin-right: 6px;
 }
 
 #calcButton {
@@ -32,6 +32,10 @@ input[type='number'] {
 
 #instructions, #mageToggle, #advancedBoxes {
   display: none;
+}
+
+#mageToggle {
+  margin-bottom: 0px;
 }
 
 #header {
@@ -53,6 +57,38 @@ input[type='number'] {
   padding: 10px;
   max-width: 900px;
   margin: auto;
+}
+
+#mainTable {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  margin: 23px;
+  display: table;
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 280px;
+  word-wrap: break-word;
+}
+
+tr {
+  height: 50px;
+  border-top: solid 2px;
+}
+
+#topRow {
+  border-top: none;
+}
+
+.column1 {
+  text-align: left;
+}
+
+.column2 {
+  text-align: right;
+  border-left: solid 2px;
 }
 
 #divider1 {
