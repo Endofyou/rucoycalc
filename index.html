@@ -64,8 +64,11 @@
     </div>
     
     <p id="ptrainToggle">
-      <input type="checkbox" id="enablePt" onclick="enablePtrain()">
-      <label for="enablePt">Evaluate<span class="notranslate"> Powertrain</span></label>
+      <label for="enablePt">Training type: </label>
+      <select id="enablePt" autocomplete="off" onchange="enablePtrain(this.selectedIndex)">
+        <option value="afk"><span class="notranslate">AFK Train</span></option>
+        <option value="ptrain"><span class="notranslate">Powertrain</span></option>
+      </select>
     </p>
 
     <p id="mageToggle">
