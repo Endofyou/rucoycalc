@@ -65,7 +65,8 @@ input[type='number'] {
 }
 
 table {
-  margin: 23px;
+  margin-top: 23px;
+  margin-bottom: 23px;
   display: table;
   border-collapse: collapse;
   table-layout: fixed;
