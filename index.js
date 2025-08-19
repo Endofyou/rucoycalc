@@ -41,6 +41,8 @@ function switchSigns() {
 }
 
 async function calculation() {
+  d.getElementById("reportLink").style.display = "block"
+  
   const base      = Math.floor(d.getElementById("box1").value)
   const stat      = Math.floor(d.getElementById("box2").value)
   const equips    = Math.floor(d.getElementById("box3").value)
