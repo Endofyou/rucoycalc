@@ -213,7 +213,7 @@ async function calculation() {
   }
   
   if (targetMob != 0) {
-    d.getElementById("rt1_1").innerHTML = "You can " + (ptrain ? "ptrain " : "train ") + `<span class="notranslate">` + targetMob + "</span> with "
+    d.getElementById("rt1_1").innerHTML = "You can " + (ptrain ? "ptrain" : "train") + `<span class="notranslate"> ` + targetMob + " </span>with "
     d.getElementById("rt1_2").innerHTML = finalProb.toFixed(1) + "%"
     d.getElementById("rt1_2").style.color = "hsl(" + Math.max(0, 4 * (finalProb.toFixed(1) - 70)) + " 100% 60%)"
     d.getElementById("rt1_3").innerHTML = " efficiency" + " for an average duration of " + minutes + ":" + seconds + "."
@@ -226,10 +226,10 @@ async function calculation() {
   }
   if (nextMob != 0) {
     d.getElementById("divider2").style.display = "block"
-    d.getElementById("resultsText3").innerHTML = `You can start training <span class="notranslate">` + nextMob + "</span> with " + targetEff + "%+ efficiency after " + reqStats + " more " + (reqStats == 1 ? "stat." : "stats.")
+    d.getElementById("resultsText3").innerHTML = `You can start training<span class="notranslate"> ` + nextMob + " </span>with " + targetEff + "%+ efficiency after " + reqStats + " more " + (reqStats == 1 ? "stat." : "stats.")
     d.getElementById("resultsText4").innerHTML = (max - nextMobDef) >= 1
     ? "You can deal " + (Math.floor(max) - nextMobDef) + " max damage to " + nextMob + "."
-    : "You need " + (statsFor1Dmg - totalStat) + " more stat" + ((statsFor1Dmg - totalStat) > 1 ? "s" : "") + ` in order to deal 1 max damage to <span class="notranslate">` + nextMob + "</span>."
+    : "You need " + (statsFor1Dmg - totalStat) + " more stat" + ((statsFor1Dmg - totalStat) > 1 ? "s" : "") + ` in order to deal 1 max damage to<span class="notranslate"> ` + nextMob + "</span>."
   } else {
     d.getElementById("divider2").style.display = "none"
     d.getElementById("resultsText3").innerHTML = ""
@@ -239,5 +239,6 @@ async function calculation() {
   fadeAnimation(0)
   window.scrollTo(0, d.body.scrollHeight)
 }
+
 
 
