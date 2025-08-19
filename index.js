@@ -11,7 +11,7 @@ function enablePtrain(isEnabled) {
     ? d.getElementById("mageToggle").style.display = "block"
     : d.getElementById("mageToggle").style.display = "none"
 }
-d.getElementById("enablePt").selectedIndex
+
 function advancedOptions() {
   d.getElementById("advancedToggle").checked
     ? d.getElementById("advancedBoxes").style.display = "block"
@@ -239,3 +239,4 @@ async function calculation() {
   fadeAnimation(0)
   window.scrollTo(0, d.body.scrollHeight)
 }
+
