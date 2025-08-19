@@ -213,7 +213,7 @@ async function calculation() {
   }
   
   if (targetMob != 0) {
-    d.getElementById("rt1_1").innerHTML = "You can " + (ptrain ? "ptrain " : "train ") + targetMob + " with "
+    d.getElementById("rt1_1").innerHTML = "You can " + (ptrain ? "ptrain " : "train ") + `<span class="notranslate">` + targetMob + "</span> with "
     d.getElementById("rt1_2").innerHTML = finalProb.toFixed(1) + "%"
     d.getElementById("rt1_2").style.color = "hsl(" + Math.max(0, 4 * (finalProb.toFixed(1) - 70)) + " 100% 60%)"
     d.getElementById("rt1_3").innerHTML = " efficiency" + " for an average duration of " + minutes + ":" + seconds + "."
@@ -239,4 +239,5 @@ async function calculation() {
   fadeAnimation(0)
   window.scrollTo(0, d.body.scrollHeight)
 }
+
 
