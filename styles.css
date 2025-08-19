@@ -105,7 +105,7 @@ tr {
   display: none;
 }
 
-#resultsText1, #resultsText2, #resultsText3, #resultsText4 {
+#resultsText1, #resultsText2, #resultsText3, #resultsText4, #reportLink {
   margin: 10px;
 }
 
@@ -118,4 +118,11 @@ tr {
   margin-bottom: 60px;
   text-shadow: 0 1px 8px #173627;
   box-shadow: 0 10px 20px #242528;
+}
+
+#reportLink {
+  font-size: 70%;
+  color: #a0dec0;
+  margin-bottom: 0px;
+  display: none;
 }
