@@ -148,8 +148,8 @@ async function calculation() {
     { name:          "Dead Eyes Lv.170", def: 276, hp:  600, ptrain: false },
     { name:     "Lizard Warrior Lv.150", def: 301, hp:  680, ptrain:  true },
     { name:              "Djinn Lv.150", def: 301, hp:  640, ptrain:  true },
-    { name: "Lizard High Shaman Lv.190", def: 327, hp:  740, ptrain: false },
-    { name:           "Gargoyle Lv.190", def: 327, hp:  740, ptrain:  true },
+    { name: "Lizard High Shaman Lv.190", def: 326, hp:  740, ptrain: false },
+    { name:           "Gargoyle Lv.190", def: 326, hp:  740, ptrain:  true },
     { name:     "Lizard Captain lv.180", def: 361, hp:  815, ptrain:  true },
     { name:           "Minotaur Lv.225", def: 511, hp: 4250, ptrain:  true },
     { name:           "Minotaur Lv.250", def: 601, hp: 5000, ptrain:  true },
@@ -239,6 +239,7 @@ async function calculation() {
   fadeAnimation(0)
   window.scrollTo(0, d.body.scrollHeight)
 }
+
 
 
 
