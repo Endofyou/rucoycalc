@@ -128,3 +128,7 @@ tr {
   margin-bottom: 0px;
   display: none;
 }
+
+#contactLink {
+  color: #00d5ff;
+}
