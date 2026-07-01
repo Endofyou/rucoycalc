@@ -75,9 +75,9 @@ async function calculation() {
   } else {
     d.getElementById("box2").style.backgroundColor = "#FFFFFF"
   }
-  if (equips < -80 || equips > 76) {
+  if (equips < -80 || equips > 126) {
     d.getElementById("box3").style.backgroundColor = "#ff8080"
-    error3 = "Box 3 value must range from -80 to 76. "
+    error3 = "Box 3 value must range from -80 to 126. "
     errors++
   } else {
     d.getElementById("box3").style.backgroundColor = "#FFFFFF"
