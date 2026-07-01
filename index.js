@@ -7,6 +7,7 @@ function instructions() {
 }
 
 function enablePtrain(isEnabled) {
+  return // << prevents selection of magic toggle
   isEnabled
     ? d.getElementById("mageToggle").style.display = "block"
     : d.getElementById("mageToggle").style.display = "none"
@@ -50,7 +51,7 @@ async function calculation() {
   const crit      = d.getElementById("critRing").checked ? 0.035 : 0.01
   const critMulti = d.getElementById("critRing").checked ? 1.075 : 1.05
   const ptrain    = d.getElementById("enablePt").selectedIndex
-  const magic     = d.getElementById("magePt"  ).checked
+  const magic     = false // d.getElementById("magePt"  ).checked
   
   d.getElementById("box1").value = base
   d.getElementById("box2").value = stat
