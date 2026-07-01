@@ -46,6 +46,10 @@ input[type='number'] {
   margin-top: 20px;
 }
 
+#updateHeader {
+  font-size: 75%;
+}
+
 #description {
   font-size: 120%;
   padding-top: 15px;
