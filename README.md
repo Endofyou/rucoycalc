@@ -1,6 +1,6 @@
 This calculator was created in response to the absence of Mims' Rucoy Calculator discord bot, as well as the previous inaccuracies of the current most popular rucoy calculator app available on the playstore at the time of its creation. The aim of this calculator is to provide highly accurate and competent results through a simple and easy to navigate interface.
 
-The interface of this calculator is simple by design. To use properly, simply input your base level, skill level, extra equips, and your current weapon's attack.
+The interface of this calculator is simple by design. To use, simply input your base level, skill level, extra equips, and your current weapon's attack.
 The results will indicate what you are currently able to train, as well as alert you of how many stats you will need to train the next mob.
 There are advanced options available that allow you to tweak two elements: target percent efficiency, and whether or not you would like to enable crit ring.
 Target percent efficiency describes the desired efficiency when training any mob.
